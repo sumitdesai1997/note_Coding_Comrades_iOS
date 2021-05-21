@@ -10,7 +10,7 @@
         <!--Categories-->
         <scene sceneID="mot-8M-q7Q">
             <objects>
-                <tableViewController id="wRb-zj-fGq" sceneMemberID="viewController">
+                <tableViewController id="wRb-zj-fGq" customClass="CategoryTVC" customModule="note_Coding_Comrades_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mhF-qn-hcX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,15 +40,15 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="rR0-6F-p1z"/>
-                        <barButtonItem title="Create Category" image="folder.badge.plus" catalog="system" id="TWM-nO-oml"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="bYx-z5-0p0"/>
+                        <barButtonItem title="Create Category" image="folder.fill.badge.plus" catalog="system" id="K7k-I1-gBh"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PrF-8V-wvz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-407" y="50"/>
+            <point key="canvasLocation" x="-612" y="50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5ha-v2-TxZ">
@@ -64,11 +64,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bS-Mx-yFk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1297" y="50"/>
+            <point key="canvasLocation" x="-1583" y="50"/>
         </scene>
     </scenes>
     <resources>
-        <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
+        <image name="folder.fill.badge.plus" catalog="system" width="128" height="91"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

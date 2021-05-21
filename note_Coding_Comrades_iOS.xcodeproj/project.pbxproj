@@ -16,6 +16,7 @@
 		03FBC48326578CDA00B02EE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03FBC48126578CDA00B02EE1 /* LaunchScreen.storyboard */; };
 		03FBC48E26578CDA00B02EE1 /* note_Coding_Comrades_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC48D26578CDA00B02EE1 /* note_Coding_Comrades_iOSTests.swift */; };
 		03FBC49926578CDA00B02EE1 /* note_Coding_Comrades_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC49826578CDA00B02EE1 /* note_Coding_Comrades_iOSUITests.swift */; };
+		03FBC4B22657A1C000B02EE1 /* CategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC4B12657A1C000B02EE1 /* CategoryTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		03FBC49426578CDA00B02EE1 /* note_Coding_Comrades_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = note_Coding_Comrades_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03FBC49826578CDA00B02EE1 /* note_Coding_Comrades_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = note_Coding_Comrades_iOSUITests.swift; sourceTree = "<group>"; };
 		03FBC49A26578CDA00B02EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03FBC4B12657A1C000B02EE1 /* CategoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		03FBC4A92657939D00B02EE1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				03FBC4B12657A1C000B02EE1 /* CategoryTVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			files = (
 				03FBC47826578CCB00B02EE1 /* ViewController.swift in Sources */,
 				03FBC47E26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodeld in Sources */,
+				03FBC4B22657A1C000B02EE1 /* CategoryTVC.swift in Sources */,
 				03FBC47426578CCB00B02EE1 /* AppDelegate.swift in Sources */,
 				03FBC47626578CCB00B02EE1 /* SceneDelegate.swift in Sources */,
 			);
