@@ -1,5 +1,5 @@
 //
-//  CategoryTVC.swift
+//  NoteTVC.swift
 //  note_Coding_Comrades_iOS
 //
 //  Created by Sumit Desai on 21/05/21.
@@ -7,12 +7,13 @@
 
 import UIKit
 
-class CategoryTVC: UITableViewController {
+class NoteTVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
     }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
