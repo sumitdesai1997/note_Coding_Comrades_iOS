@@ -101,6 +101,8 @@
 		03FBC47226578CCB00B02EE1 /* note_Coding_Comrades_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				03FBC4AA2657945B00B02EE1 /* CoreData */,
+				03FBC4A92657939D00B02EE1 /* ViewControllers */,
 				03FBC47326578CCB00B02EE1 /* AppDelegate.swift */,
 				03FBC47526578CCB00B02EE1 /* SceneDelegate.swift */,
 				03FBC47726578CCB00B02EE1 /* ViewController.swift */,
@@ -108,7 +110,6 @@
 				03FBC47F26578CDA00B02EE1 /* Assets.xcassets */,
 				03FBC48126578CDA00B02EE1 /* LaunchScreen.storyboard */,
 				03FBC48426578CDA00B02EE1 /* Info.plist */,
-				03FBC47C26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodeld */,
 			);
 			path = note_Coding_Comrades_iOS;
 			sourceTree = "<group>";
@@ -129,6 +130,21 @@
 				03FBC49A26578CDA00B02EE1 /* Info.plist */,
 			);
 			path = note_Coding_Comrades_iOSUITests;
+			sourceTree = "<group>";
+		};
+		03FBC4A92657939D00B02EE1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		03FBC4AA2657945B00B02EE1 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				03FBC47C26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
