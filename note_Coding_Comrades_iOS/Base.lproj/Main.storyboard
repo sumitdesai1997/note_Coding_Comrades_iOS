@@ -32,6 +32,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="7Pl-t2-Bfy" kind="show" identifier="toNoteTVC" id="QYn-DF-I6s"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -73,10 +76,16 @@
                             <outlet property="delegate" destination="7Pl-t2-Bfy" id="2y7-P5-qQe"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ch0-aW-S6Z"/>
+                        <barButtonItem title="Create Note" image="note.text.badge.plus" catalog="system" id="H24-Ae-u3h"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="scV-VS-v2d"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zhv-EK-GqR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="314" y="61"/>
+            <point key="canvasLocation" x="309" y="50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5ha-v2-TxZ">
@@ -98,6 +107,7 @@
     </scenes>
     <resources>
         <image name="folder.fill.badge.plus" catalog="system" width="128" height="91"/>
+        <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
