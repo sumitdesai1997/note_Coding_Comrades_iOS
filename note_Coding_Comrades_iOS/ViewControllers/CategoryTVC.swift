@@ -64,11 +64,11 @@ class CategoryTVC: UITableViewController {
         alert.addAction(cancelAction)
         alert.addTextField { (field) in
             textField = field
-            textField.placeholder = "folder name"
+            textField.placeholder = "Category name"
         }
         
         present(alert, animated: true, completion: nil)
-    }
+    }			
     
     // saving data to context
     func saveCategory() {
@@ -76,7 +76,7 @@ class CategoryTVC: UITableViewController {
             try context.save()
             tableView.reloadData()
         } catch {
-            print("Error saving the folder \(error.localizedDescription)")
+            print("Error saving the category \(error.localizedDescription)")
         }
     }
 
