@@ -44,8 +44,7 @@ class CategoryTVC: UITableViewController {
         return cell
     }
     
-    // creating method for new category addition
-    @IBAction func createCategory(_ sender: UIBarButtonItem) {
+    @IBAction func createCategory(_ sender: Any) {
         var textField = UITextField()
         let alert = UIAlertController(title: "Create new category", message: "please give a name", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { (action) in
@@ -68,7 +67,19 @@ class CategoryTVC: UITableViewController {
         }
         
         present(alert, animated: true, completion: nil)
-    }			
+    }
+    
+    // loading from from core data
+    func loadCategoryList() {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        
+        do {
+            categoryList = try context.fetch(request)
+        } catch {
+            print("Error loading category list \(error.localizedDescription)")
+        }
+        tableView.reloadData()
+    }
     
     // saving data to context
     func saveCategory() {
@@ -78,6 +89,11 @@ class CategoryTVC: UITableViewController {
         } catch {
             print("Error saving the category \(error.localizedDescription)")
         }
+    }
+    
+    // delete from core data
+    func deleteCategory(category: Category) {
+        context.delete(category)
     }
 
 }

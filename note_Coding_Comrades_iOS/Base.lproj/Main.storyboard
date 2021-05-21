@@ -42,14 +42,16 @@
                             <outlet property="delegate" destination="wRb-zj-fGq" id="DC5-Ih-onY"/>
                         </connections>
                     </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH">
-                        <barButtonItem key="rightBarButtonItem" title="Create category" image="folder.badge.plus" catalog="system" id="nuP-71-lVv">
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="M6f-5T-Lyg"/>
+                        <barButtonItem title="Create category" image="folder.badge.plus" catalog="system" id="ink-5g-wwq">
                             <connections>
-                                <action selector="createCategory:" destination="wRb-zj-fGq" id="WRV-lR-8GV"/>
+                                <action selector="createCategory:" destination="wRb-zj-fGq" id="Ae0-Kz-2Bc"/>
                             </connections>
                         </barButtonItem>
-                    </navigationItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ADJ-yz-cxg"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PrF-8V-wvz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
