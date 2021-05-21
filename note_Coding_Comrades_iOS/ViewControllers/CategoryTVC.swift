@@ -36,6 +36,14 @@ class CategoryTVC: UITableViewController {
         return categoryList.count
     }
     
+    // method to define the cell and prepare for value for elements inside the cell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory", for: indexPath)
+                
+        cell.textLabel?.text = categoryList[indexPath.row].name
+        return cell
+    }
+    
     // creating method for new category addition
     @IBAction func createCategory(_ sender: UIBarButtonItem) {
         var textField = UITextField()

@@ -56,7 +56,7 @@
             </objects>
             <point key="canvasLocation" x="-612" y="50"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Notes-->
         <scene sceneID="GO8-ZB-pd5">
             <objects>
                 <tableViewController id="7Pl-t2-Bfy" sceneMemberID="viewController">
@@ -83,7 +83,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ch0-aW-S6Z"/>
                         <barButtonItem title="Create Note" image="note.text.badge.plus" catalog="system" id="H24-Ae-u3h"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="scV-VS-v2d"/>
+                    <navigationItem key="navigationItem" title="Notes" id="scV-VS-v2d"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zhv-EK-GqR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
