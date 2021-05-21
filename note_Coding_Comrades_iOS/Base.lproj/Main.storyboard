@@ -44,7 +44,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH">
-                        <barButtonItem key="rightBarButtonItem" title="Create category" image="folder.badge.plus" catalog="system" id="nuP-71-lVv"/>
+                        <barButtonItem key="rightBarButtonItem" title="Create category" image="folder.badge.plus" catalog="system" id="nuP-71-lVv">
+                            <connections>
+                                <action selector="createCategory:" destination="wRb-zj-fGq" id="WRV-lR-8GV"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
