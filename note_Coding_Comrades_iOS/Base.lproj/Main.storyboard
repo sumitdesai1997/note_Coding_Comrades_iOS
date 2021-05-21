@@ -42,11 +42,10 @@
                             <outlet property="delegate" destination="wRb-zj-fGq" id="DC5-Ih-onY"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="bYx-z5-0p0"/>
-                        <barButtonItem title="Create Category" image="folder.fill.badge.plus" catalog="system" id="K7k-I1-gBh"/>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH">
+                        <barButtonItem key="rightBarButtonItem" title="Create category" image="folder.badge.plus" catalog="system" id="nuP-71-lVv"/>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PrF-8V-wvz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -106,7 +105,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="folder.fill.badge.plus" catalog="system" width="128" height="91"/>
+        <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
         <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
