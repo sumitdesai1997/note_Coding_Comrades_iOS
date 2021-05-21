@@ -46,6 +46,7 @@ class CategoryTVC: UITableViewController {
             let newCategory = Category(context: self.context)
             newCategory.name = textField.text!
             self.categoryList.append(newCategory)
+            self.saveCategory()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         // change the color of the cancel button action
@@ -59,6 +60,16 @@ class CategoryTVC: UITableViewController {
         }
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    // saving data to context
+    func saveCategory() {
+        do {
+            try context.save()
+            tableView.reloadData()
+        } catch {
+            print("Error saving the folder \(error.localizedDescription)")
+        }
     }
 
 }
