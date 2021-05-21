@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -83,7 +84,11 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ch0-aW-S6Z"/>
-                        <barButtonItem title="Create Note" image="note.text.badge.plus" catalog="system" id="H24-Ae-u3h"/>
+                        <barButtonItem title="Create Note" image="note.text.badge.plus" catalog="system" id="H24-Ae-u3h">
+                            <connections>
+                                <segue destination="kFP-6x-8QO" kind="show" id="jdJ-pw-VUq"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Notes" id="scV-VS-v2d"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -91,6 +96,106 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zhv-EK-GqR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="309" y="50"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="nUN-PT-yZb">
+            <objects>
+                <viewController id="kFP-6x-8QO" customClass="ViewController" customModule="note_Coding_Comrades_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e1K-te-1fh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dry-hn-NwQ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Note" id="z9g-qF-pgf"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SIn-9i-W5V">
+                                <rect key="frame" x="20" y="170" width="40.5" height="27.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AgI-5c-DYO">
+                                <rect key="frame" x="20" y="212.5" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWx-O2-HhJ">
+                                <rect key="frame" x="20" y="276.5" width="75" height="28"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tEH-aH-SCk">
+                                <rect key="frame" x="20" y="319.5" width="374" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="B6s-H6-ces"/>
+                                    <constraint firstAttribute="width" constant="374" id="LfH-oM-nDU"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGH-FD-B0p">
+                                <rect key="frame" x="20" y="477.5" width="154" height="28"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4F-cN-wDm">
+                                <rect key="frame" x="20" y="520.5" width="160" height="40"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="KaS-q7-BQd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                <state key="normal" title="Upload Picture">
+                                    <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9M-5f-S8T">
+                                <rect key="frame" x="200" y="520.5" width="160" height="40"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="q3l-bz-kTH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                <state key="normal" title="Take Picture">
+                                    <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gUs-Ax-RFq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SIn-9i-W5V" firstAttribute="top" secondItem="gUs-Ax-RFq" secondAttribute="top" constant="30" id="3Gx-Z4-RcU"/>
+                            <constraint firstItem="W9M-5f-S8T" firstAttribute="top" secondItem="kGH-FD-B0p" secondAttribute="bottom" constant="15" id="4BS-0A-gfu"/>
+                            <constraint firstItem="kGH-FD-B0p" firstAttribute="top" secondItem="tEH-aH-SCk" secondAttribute="bottom" constant="30" id="4qV-I8-quB"/>
+                            <constraint firstItem="kGH-FD-B0p" firstAttribute="leading" secondItem="gUs-Ax-RFq" secondAttribute="leading" constant="20" id="CYF-MO-S9h"/>
+                            <constraint firstItem="I4F-cN-wDm" firstAttribute="leading" secondItem="gUs-Ax-RFq" secondAttribute="leading" constant="20" id="E9T-Ed-7y7"/>
+                            <constraint firstItem="W9M-5f-S8T" firstAttribute="leading" secondItem="I4F-cN-wDm" secondAttribute="trailing" constant="20" id="Lqm-ib-JjC"/>
+                            <constraint firstItem="tEH-aH-SCk" firstAttribute="top" secondItem="HWx-O2-HhJ" secondAttribute="bottom" constant="15" id="T3l-Em-Acg"/>
+                            <constraint firstItem="gUs-Ax-RFq" firstAttribute="trailing" secondItem="tEH-aH-SCk" secondAttribute="trailing" constant="20" id="Ya9-IV-qgD"/>
+                            <constraint firstItem="HWx-O2-HhJ" firstAttribute="top" secondItem="AgI-5c-DYO" secondAttribute="bottom" constant="30" id="d5s-Lo-6CN"/>
+                            <constraint firstItem="AgI-5c-DYO" firstAttribute="leading" secondItem="gUs-Ax-RFq" secondAttribute="leading" constant="20" id="do8-D4-0Ht"/>
+                            <constraint firstItem="gUs-Ax-RFq" firstAttribute="trailing" secondItem="AgI-5c-DYO" secondAttribute="trailing" constant="20" id="gVi-5h-fS8"/>
+                            <constraint firstItem="HWx-O2-HhJ" firstAttribute="leading" secondItem="gUs-Ax-RFq" secondAttribute="leading" constant="20" id="kI3-0Q-7pY"/>
+                            <constraint firstItem="AgI-5c-DYO" firstAttribute="top" secondItem="SIn-9i-W5V" secondAttribute="bottom" constant="15" id="lwK-1C-hdN"/>
+                            <constraint firstItem="tEH-aH-SCk" firstAttribute="leading" secondItem="gUs-Ax-RFq" secondAttribute="leading" constant="20" id="vfA-dw-vDc"/>
+                            <constraint firstItem="SIn-9i-W5V" firstAttribute="leading" secondItem="gUs-Ax-RFq" secondAttribute="leading" constant="20" id="wvg-7j-PFK"/>
+                            <constraint firstItem="I4F-cN-wDm" firstAttribute="top" secondItem="kGH-FD-B0p" secondAttribute="bottom" constant="15" id="y1G-RI-DLF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Be4-Rf-rp2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="neU-Xb-8Iz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1250.7246376811595" y="49.553571428571423"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5ha-v2-TxZ">
@@ -118,6 +223,12 @@
     <resources>
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
         <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

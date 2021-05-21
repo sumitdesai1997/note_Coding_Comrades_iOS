@@ -70,16 +70,16 @@ class CategoryTVC: UITableViewController {
     }
     
     // loading from from core data
-    func loadCategoryList() {
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        
-        do {
-            categoryList = try context.fetch(request)
-        } catch {
-            print("Error loading category list \(error.localizedDescription)")
-        }
-        tableView.reloadData()
-    }
+//    func loadCategoryList() {
+//        let request: NSFetchRequest<Category> = Category.fetchRequest()
+//
+//        do {
+//            categoryList = try context.fetch(request)
+//        } catch {
+//            print("Error loading category list \(error.localizedDescription)")
+//        }
+//        tableView.reloadData()
+//    }
     
     // saving data to context
     func saveCategory() {
