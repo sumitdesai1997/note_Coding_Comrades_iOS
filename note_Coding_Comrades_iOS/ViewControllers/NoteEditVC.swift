@@ -21,6 +21,9 @@ class NoteEditVC: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        mapKit.showsUserLocation = false // show user location
+        mapKit.isZoomEnabled = false// disable zoom
+        
         // ------------ location manager init -----------
         locationManager.delegate = self // assign location manager delegate
         mapKit.delegate = self // this class handles the delegate mapkit
