@@ -61,7 +61,6 @@
                                 <action selector="createCategory:" destination="wRb-zj-fGq" id="Ae0-Kz-2Bc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ADJ-yz-cxg"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="CWc-ob-qeR">
@@ -298,10 +297,13 @@
                             <constraint firstItem="QBP-kB-gPB" firstAttribute="top" secondItem="d0r-qe-CL2" secondAttribute="top" id="elK-GX-aFD"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="eNA-Rp-gwh"/>
+                    <navigationItem key="navigationItem" id="eNA-Rp-gwh">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="iHl-tV-2Yr"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapKit" destination="ehB-BM-aM4" id="xoQ-Vi-k5m"/>
                         <outlet property="notePictureImg" destination="Tns-cg-sFU" id="kPV-kY-ppw"/>
+                        <outlet property="saveButton" destination="iHl-tV-2Yr" id="cdb-3Z-0d4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXC-Qt-8Yp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
