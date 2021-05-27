@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class NoteTVC: UITableViewController {
     
@@ -15,7 +16,7 @@ class NoteTVC: UITableViewController {
     
     var selectedCategory : Category? = nil {
         didSet{
-            
+            fetchingNotes()
         }
     }
     override func viewDidLoad() {
@@ -40,6 +41,21 @@ class NoteTVC: UITableViewController {
         cell.textLabel?.text = noteList[indexPath.row].title
         
         return cell
+    }
+    
+    // fetching the notes from the core data
+    func fetchingNotes(predicate: NSPredicate? = nil) {
+        let request: NSFetchRequest<Note> = Note.fetchRequest()
+        let folderPredicate = NSPredicate(format: "parentCategory.name=%@", selectedCategory!.name!)
+        request.predicate = folderPredicate
+        
+        
+        do {
+            noteList = try context.fetch(request)
+        } catch {
+            print("Error loading notes \(error.localizedDescription)")
+        }
+        tableView.reloadData()
     }
 
 }
