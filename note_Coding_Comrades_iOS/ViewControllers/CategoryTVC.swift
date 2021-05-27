@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CategoryTVC: UITableViewController {
 
@@ -22,7 +23,7 @@ class CategoryTVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        fetchCategoryList()
     }
     // MARK: - Table view data source
 
@@ -70,16 +71,16 @@ class CategoryTVC: UITableViewController {
     }
     
     // loading from from core data
-//    func loadCategoryList() {
-//        let request: NSFetchRequest<Category> = Category.fetchRequest()
-//
-//        do {
-//            categoryList = try context.fetch(request)
-//        } catch {
-//            print("Error loading category list \(error.localizedDescription)")
-//        }
-//        tableView.reloadData()
-//    }
+    func fetchCategoryList() {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+
+        do {
+            categoryList = try context.fetch(request)
+        } catch {
+            print("Error loading category list \(error.localizedDescription)")
+        }
+        tableView.reloadData()
+    }
     
     // saving data to context
     func saveCategory() {
