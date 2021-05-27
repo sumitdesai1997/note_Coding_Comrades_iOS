@@ -39,6 +39,23 @@ class NoteEditVC: UIViewController {
         mapKit.addAnnotation(annotation) // adds the annotation to the map
     }
     
+    func getLocation(coordinate: CLLocationCoordinate2D){
+        let newLocation: CLLocation =  CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) // creates the location as CLLocation
+
+        CLGeocoder().reverseGeocodeLocation(newLocation) { (placemarks, error) in
+            if error != nil { // if there was an error
+                print("error reverseGeocodeLocation" , error!) // print the error
+            } else {
+                if let placemark = placemarks?[0] {
+//                    placemark.country
+//                    placemark.administrativeArea
+//                    placemark.locality
+                    self.addAnnotation(coordinate: coordinate, title: "", subtitle: "" )
+                }
+            }
+        }
+    }
+    
 
     /*
     // MARK: - Navigation
