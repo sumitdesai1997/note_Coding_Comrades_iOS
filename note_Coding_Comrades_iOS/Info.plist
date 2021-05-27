@@ -57,6 +57,8 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Accessing the location is mandatory to keep this app running</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Accessing the library is mandatory for using the application</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
