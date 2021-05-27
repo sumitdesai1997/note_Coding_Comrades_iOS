@@ -52,6 +52,15 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         }
     }
     
+    @IBAction func uploadPictureClick(_ sender: Any) {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.allowsEditing = true
+        vc.delegate = self
+        present(vc, animated: true)
+    }
+    
+    
     //*************** MAP HANDLING ******************************
     // creates an annotation depending on the coordinates
     func addAnnotation(coordinate: CLLocationCoordinate2D, title: String, subtitle: String ){

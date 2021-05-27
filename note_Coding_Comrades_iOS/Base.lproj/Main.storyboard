@@ -193,6 +193,9 @@
                                                 <state key="normal" title="Upload Picture">
                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="uploadPictureClick:" destination="X4X-3d-swQ" eventType="touchUpInside" id="3nb-jD-chV"/>
+                                                </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tns-cg-sFU">
                                                 <rect key="frame" x="87" y="368" width="240" height="128"/>
