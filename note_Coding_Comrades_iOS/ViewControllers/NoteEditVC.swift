@@ -15,7 +15,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     @IBOutlet weak var notePictureImg: UIImageView!
     
     // AUDIO VARIABLES
-    var recordButton: UIButton!
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     
@@ -45,11 +44,11 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             try recordingSession.setActive(true)
             recordingSession.requestRecordPermission() { [unowned self] allowed in
                 DispatchQueue.main.async {
-                    if allowed {
-                        self.loadRecordingUI()
-                    } else {
-                        // failed to record!
-                    }
+//                    if allowed {
+//                        self.loadRecordingUI()
+//                    } else {
+//                        // failed to record!
+//                    }
                 }
             }
         } catch {
@@ -98,12 +97,14 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     }
     
     //*************** AUDIO HANDLING ******************************
-    func loadRecordingUI() {
-        recordButton = UIButton(frame: CGRect(x: 64, y: 64, width: 128, height: 64))
-        recordButton.setTitle("Tap to Record", for: .normal)
-        recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
-        recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
-        view.addSubview(recordButton)
+    
+    
+    @IBAction func recordingClick(_ sender: UIButton) {
+        if audioRecorder == nil {
+                startRecording()
+            } else {
+                finishRecording(success: true)
+            }
     }
     
     func startRecording() {
@@ -121,7 +122,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             audioRecorder.delegate = self
             audioRecorder.record()
 
-            recordButton.setTitle("Tap to Stop", for: .normal)
+            //recordButton.setTitle("Tap to Stop", for: .normal)
         } catch {
             finishRecording(success: false)
         }
@@ -129,27 +130,13 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        print("path: \(paths[0])")
         return paths[0]
     }
     
     func finishRecording(success: Bool) {
         audioRecorder.stop()
         audioRecorder = nil
-
-        if success {
-            recordButton.setTitle("Tap to Re-record", for: .normal)
-        } else {
-            recordButton.setTitle("Tap to Record", for: .normal)
-            // recording failed :(
-        }
-    }
-    
-    @objc func recordTapped() {
-        if audioRecorder == nil {
-            startRecording()
-        } else {
-            finishRecording(success: true)
-        }
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
