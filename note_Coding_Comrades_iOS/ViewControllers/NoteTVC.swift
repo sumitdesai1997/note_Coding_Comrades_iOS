@@ -14,6 +14,9 @@ class NoteTVC: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    // search bar object
+    let searchBar = UISearchController(searchResultsController: nil)
+    
     var selectedCategory : Category? = nil {
         didSet{
             fetchNotes()
@@ -21,7 +24,8 @@ class NoteTVC: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        showSearchBar()
     }
     
     // MARK: - Table view data source
@@ -33,6 +37,7 @@ class NoteTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        print("notelist: \(noteList.count)")
         return noteList.count
     }
     
@@ -58,8 +63,13 @@ class NoteTVC: UITableViewController {
     // fetching the notes from the core data
     func fetchNotes(predicate: NSPredicate? = nil) {
         let request: NSFetchRequest<Note> = Note.fetchRequest()
-        let folderPredicate = NSPredicate(format: "parentCategory.name=%@", selectedCategory!.name!)
-        request.predicate = folderPredicate
+        let categoryPredicate = NSPredicate(format: "parentCategory.name=%@", selectedCategory!.name!)
+        
+        if let searchPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, searchPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
         
         
         do {
@@ -101,9 +111,47 @@ class NoteTVC: UITableViewController {
         }
     }
     
+    func showSearchBar() {
+        searchBar.searchBar.delegate = self
+        searchBar.obscuresBackgroundDuringPresentation = false
+        searchBar.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchBar
+        definesPresentationContext = true
+        searchBar.searchBar.searchTextField.textColor = .black
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nevc = segue.destination as! NoteEditVC
         nevc.delegate = self
     }
 
+}
+
+extension NoteTVC: UISearchBarDelegate{
+        
+    // method to search the products as per the user input after click on search button on keyboard
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // add predicate
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        fetchNotes(predicate: predicate)
+    }
+    
+    // method for cancle button click near search bar
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchNotes()
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
+    }
+    
+    // textDidChange method for search bar
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            fetchNotes()
+            
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
 }
