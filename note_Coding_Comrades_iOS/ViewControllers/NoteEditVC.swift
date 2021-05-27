@@ -28,6 +28,16 @@ class NoteEditVC: UIViewController {
         locationManager.startUpdatingLocation() // start updating the location
     }
     
+    //*************** MAP HANDLING ******************************
+    // creates an annotation depending on the coordinates
+    func addAnnotation(coordinate: CLLocationCoordinate2D, title: String, subtitle: String ){
+        let annotation = MKPointAnnotation() // creates the point annotation object
+        annotation.title = title // sets the annotation title
+        annotation.subtitle = subtitle // sets the annotation subtitle
+        annotation.coordinate = coordinate // sets the annotation coordinate
+        mapKit.addAnnotation(annotation) // adds the annotation to the map
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -56,5 +66,7 @@ extension NoteEditVC : CLLocationManagerDelegate{
         currentLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) // sets the current location into the global variable
         
         mapKit.setRegion(MKCoordinateRegion(center: currentLocation!, span: span), animated: true) // sets the region for the map
+        
+        addAnnotation(coordinate: currentLocation!, title: "Current Location", subtitle: "You are here" ) // sets the annotation
     }
 }
