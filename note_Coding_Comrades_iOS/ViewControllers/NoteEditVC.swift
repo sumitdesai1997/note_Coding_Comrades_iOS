@@ -17,6 +17,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var detailsTF: UITextView!
     
+    var delegate : NoteTVC?
+    
     // AUDIO VARIABLES
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
@@ -24,6 +26,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     // MAP - LOCATION VARIABLES
     var locationManager = CLLocationManager() // define location manager
     var currentLocation: CLLocationCoordinate2D? = nil // set current location variable
+    var userLocation = CLLocation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +61,18 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             // failed to record!
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        guard titleTF.text != "" && detailsTF.text != "" else {return}
+        
+        let png = notePictureImg.image!.pngData()!
+        let audio = ""
+        let coordinateX = userLocation.coordinate.latitude
+        let coordinateY = userLocation.coordinate.longitude
+        let date = Date()
+        
+        delegate!.updateNote(title: titleTF.text!, details: detailsTF.text!, image: png, audio: audio, coordinateX: coordinateX, coordinateY: coordinateY, date: date)
+   }
     
     //*************** IMAGE HANDLING ******************************
     @IBAction func takePictureClick(_ sender: Any) {
@@ -211,7 +226,7 @@ extension NoteEditVC: MKMapViewDelegate {
 extension NoteEditVC : CLLocationManagerDelegate{
     // gets the current location and creates the annotation for it, as well as centers the map into the region closer to the location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation = locations[0] // gets the location of the user
+        userLocation = locations[0] // gets the location of the user
         
         let latitude = userLocation.coordinate.latitude // user latitude
         let longitude = userLocation.coordinate.longitude // user longitude
