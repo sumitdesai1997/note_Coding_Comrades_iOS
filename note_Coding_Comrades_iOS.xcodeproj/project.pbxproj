@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0355193B265F84420053613E /* NoteEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0355193A265F84420053613E /* NoteEditVC.swift */; };
 		03FBC47426578CCB00B02EE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC47326578CCB00B02EE1 /* AppDelegate.swift */; };
 		03FBC47626578CCB00B02EE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC47526578CCB00B02EE1 /* SceneDelegate.swift */; };
 		03FBC47826578CCB00B02EE1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC47726578CCB00B02EE1 /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0355193A265F84420053613E /* NoteEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditVC.swift; sourceTree = "<group>"; };
 		03FBC47026578CCB00B02EE1 /* note_Coding_Comrades_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = note_Coding_Comrades_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03FBC47326578CCB00B02EE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03FBC47526578CCB00B02EE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				03FBC4B12657A1C000B02EE1 /* CategoryTVC.swift */,
 				03FBC4B92657A4F400B02EE1 /* NoteTVC.swift */,
+				0355193A265F84420053613E /* NoteEditVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				03FBC47E26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodeld in Sources */,
 				03FBC4B22657A1C000B02EE1 /* CategoryTVC.swift in Sources */,
 				03FBC4BA2657A4F400B02EE1 /* NoteTVC.swift in Sources */,
+				0355193B265F84420053613E /* NoteEditVC.swift in Sources */,
 				03FBC47426578CCB00B02EE1 /* AppDelegate.swift in Sources */,
 				03FBC47626578CCB00B02EE1 /* SceneDelegate.swift in Sources */,
 			);
