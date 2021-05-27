@@ -16,7 +16,7 @@ class NoteTVC: UITableViewController {
     
     var selectedCategory : Category? = nil {
         didSet{
-            fetchingNotes()
+            fetchNotes()
         }
     }
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ class NoteTVC: UITableViewController {
     }
     
     // fetching the notes from the core data
-    func fetchingNotes(predicate: NSPredicate? = nil) {
+    func fetchNotes(predicate: NSPredicate? = nil) {
         let request: NSFetchRequest<Note> = Note.fetchRequest()
         let folderPredicate = NSPredicate(format: "parentCategory.name=%@", selectedCategory!.name!)
         request.predicate = folderPredicate
@@ -56,6 +56,37 @@ class NoteTVC: UITableViewController {
             print("Error loading notes \(error.localizedDescription)")
         }
         tableView.reloadData()
+    }
+    
+    // deleting the note from the core data
+    func deleteNote(note: Note) {
+        context.delete(note)
+    }
+    
+    // updating the note into core data
+    func updateNote(title: String, details: String, image: Data, audio: String, coordinateX: Double, coordinateY: Double, date: Date) {
+        let newNote = Note(context: context)
+        newNote.title = title
+        newNote.details = details
+        newNote.image = image
+        newNote.audio = audio
+        newNote.coordinateX = coordinateX
+        newNote.coordinateY = coordinateY
+        newNote.parentCategory = selectedCategory
+        newNote.date = date
+        
+        saveNotes()
+        noteList.append(newNote)
+        fetchNotes()
+    }
+    
+    // saving notes into core data
+    func saveNotes() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving the notes \(error.localizedDescription)")
+        }
     }
 
 }
