@@ -8,9 +8,10 @@
 import UIKit
 import MapKit
 
-class NoteEditVC: UIViewController {
+class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     @IBOutlet weak var mapKit: MKMapView!
+    @IBOutlet weak var notePictureImg: UIImageView!
     
     // MAP - LOCATION VARIABLES
     var locationManager = CLLocationManager() // define location manager
@@ -30,6 +31,25 @@ class NoteEditVC: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest // define location manager accuracy
         locationManager.requestWhenInUseAuthorization() // define request authorization
         locationManager.startUpdatingLocation() // start updating the location
+    }
+    
+    //*************** IMAGE HANDLING ******************************
+    @IBAction func takePictureClick(_ sender: Any) {
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let alertController = UIAlertController(title: nil, message: "Device has no camera.", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (alert: UIAlertAction!) in
+            })
+            
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            let vc = UIImagePickerController()
+            vc.sourceType = .camera
+            vc.allowsEditing = true
+            vc.delegate = self
+            present(vc, animated: true)
+        }
     }
     
     //*************** MAP HANDLING ******************************

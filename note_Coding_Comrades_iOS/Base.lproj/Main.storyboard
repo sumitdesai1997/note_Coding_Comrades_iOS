@@ -179,6 +179,9 @@
                                                 <state key="normal" title="Take Picture">
                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="takePictureClick:" destination="X4X-3d-swQ" eventType="touchUpInside" id="CRw-LI-Cio"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iq5-ju-hH1">
                                                 <rect key="frame" x="227" y="319" width="130" height="34"/>
@@ -292,6 +295,7 @@
                     <navigationItem key="navigationItem" id="eNA-Rp-gwh"/>
                     <connections>
                         <outlet property="mapKit" destination="ehB-BM-aM4" id="xoQ-Vi-k5m"/>
+                        <outlet property="notePictureImg" destination="Tns-cg-sFU" id="kPV-kY-ppw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXC-Qt-8Yp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
