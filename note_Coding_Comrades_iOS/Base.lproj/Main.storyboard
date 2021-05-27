@@ -301,9 +301,11 @@
                         <barButtonItem key="rightBarButtonItem" title="Save" id="iHl-tV-2Yr"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="detailsTF" destination="WOT-hk-gYt" id="3Zf-QO-g7y"/>
                         <outlet property="mapKit" destination="ehB-BM-aM4" id="xoQ-Vi-k5m"/>
                         <outlet property="notePictureImg" destination="Tns-cg-sFU" id="kPV-kY-ppw"/>
                         <outlet property="saveButton" destination="iHl-tV-2Yr" id="cdb-3Z-0d4"/>
+                        <outlet property="titleTF" destination="KRx-nL-clj" id="4Zs-7j-QY0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXC-Qt-8Yp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

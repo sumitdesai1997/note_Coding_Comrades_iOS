@@ -14,6 +14,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     @IBOutlet weak var mapKit: MKMapView!
     @IBOutlet weak var notePictureImg: UIImageView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var titleTF: UITextField!
+    @IBOutlet weak var detailsTF: UITextView!
     
     // AUDIO VARIABLES
     var recordingSession: AVAudioSession!
