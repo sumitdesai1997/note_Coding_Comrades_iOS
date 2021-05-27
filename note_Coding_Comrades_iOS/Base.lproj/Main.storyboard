@@ -210,19 +210,19 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DS-HT-mCJ">
-                                                <rect key="frame" x="20" y="563" width="30" height="30"/>
-                                                <state key="normal" title="Play"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DS-HT-mCJ">
+                                                <rect key="frame" x="20" y="563" width="49" height="22"/>
+                                                <state key="normal" title="Play" image="play.fill" catalog="system"/>
                                             </button>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Tgb-4m-Hr9">
-                                                <rect key="frame" x="68" y="563" width="154" height="31"/>
+                                                <rect key="frame" x="87" y="563" width="154" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="5Jz-Al-4cY"/>
                                                 </constraints>
                                             </slider>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vrd-Dk-K8m">
-                                                <rect key="frame" x="240" y="563" width="49" height="30"/>
-                                                <state key="normal" title="Record"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vrd-Dk-K8m">
+                                                <rect key="frame" x="259" y="563" width="75" height="22"/>
+                                                <state key="normal" title="Record" image="mic.fill" catalog="system"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="550-WD-mUG">
                                                 <rect key="frame" x="20" y="608" width="63" height="22"/>
@@ -331,7 +331,9 @@
     <resources>
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
+        <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
