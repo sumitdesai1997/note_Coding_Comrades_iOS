@@ -60,6 +60,19 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         present(vc, animated: true)
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+
+        guard let image = info[.editedImage] as? UIImage else {
+            print("No image found")
+            return
+        }
+        
+        notePictureImg.image = image
+        // print out the image size as a test
+        print(image.size)
+    }
+    
     
     //*************** MAP HANDLING ******************************
     // creates an annotation depending on the coordinates
