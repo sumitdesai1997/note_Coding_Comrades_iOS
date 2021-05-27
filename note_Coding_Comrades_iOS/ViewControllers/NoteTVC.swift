@@ -8,7 +8,11 @@
 import UIKit
 
 class NoteTVC: UITableViewController {
-
+    var selectedCategory : Category? = nil {
+        didSet{
+            
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

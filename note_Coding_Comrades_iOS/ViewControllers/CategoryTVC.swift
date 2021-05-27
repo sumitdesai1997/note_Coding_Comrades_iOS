@@ -124,5 +124,17 @@ class CategoryTVC: UITableViewController {
     func deleteCategory(category: Category) {
         context.delete(category)
     }
+    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        let ntvc = segue.destination as! NoteTVC
+        if let indexPath = tableView.indexPathForSelectedRow {
+            ntvc.selectedCategory = categoryList[indexPath.row]
+        }
+    }
 
 }
