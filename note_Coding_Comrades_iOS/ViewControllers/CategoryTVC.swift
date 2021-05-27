@@ -45,6 +45,20 @@ class CategoryTVC: UITableViewController {
         return cell
     }
     
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            deleteCategory(category: categoryList[indexPath.row])
+            saveCategory    ()
+            categoryList.remove(at: indexPath.row)
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
     @IBAction func createCategory(_ sender: Any) {
         var textField = UITextField()
         let alert = UIAlertController(title: "Create new category", message: "please give a name", preferredStyle: .alert)
