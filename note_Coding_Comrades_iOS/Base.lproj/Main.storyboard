@@ -79,7 +79,7 @@
         <!--Notes-->
         <scene sceneID="GO8-ZB-pd5">
             <objects>
-                <tableViewController id="7Pl-t2-Bfy" sceneMemberID="viewController">
+                <tableViewController id="7Pl-t2-Bfy" customClass="NoteTVC" customModule="note_Coding_Comrades_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GBI-Ww-F2L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

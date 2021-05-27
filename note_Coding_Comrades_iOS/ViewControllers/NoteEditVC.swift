@@ -23,6 +23,7 @@ class NoteEditVC: UIViewController {
         
         // ------------ location manager init -----------
         locationManager.delegate = self // assign location manager delegate
+        mapKit.delegate = self // this class handles the delegate mapkit
         locationManager.desiredAccuracy = kCLLocationAccuracyBest // define location manager accuracy
         locationManager.requestWhenInUseAuthorization() // define request authorization
         locationManager.startUpdatingLocation() // start updating the location
@@ -49,6 +50,25 @@ class NoteEditVC: UIViewController {
     }
     */
 
+}
+
+//MARK: - MKMap Extension Class
+extension NoteEditVC: MKMapViewDelegate {
+    // ViewFor annotation method
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation { // if the annotation is the user location
+            return nil // return nothing
+        }
+        
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin" + annotation.title!!) // create the annotation view
+        annotationView.animatesDrop = true // set true annotation animation
+        annotationView.canShowCallout = true // set true can show callout
+//        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) // set callout button
+        annotationView.pinTintColor = UIColor.cyan
+        return annotationView
+    }
+    
 }
 
 extension NoteEditVC : CLLocationManagerDelegate{
