@@ -8,12 +8,23 @@
 import UIKit
 import MapKit
 
-class NoteEditVC: UIViewController {
+class NoteEditVC: UIViewController, CLLocationManagerDelegate {
 
+    @IBOutlet weak var mapKit: MKMapView!
+    
+    // MAP - LOCATION VARIABLES
+    var locationManager = CLLocationManager() // define location manager
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // ------------ location manager init -----------
+        locationManager.delegate = self // assign location manager delegate
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest // define location manager accuracy
+        locationManager.requestWhenInUseAuthorization() // define request authorization
+        locationManager.startUpdatingLocation() // start updating the location
     }
     
 

@@ -290,6 +290,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eNA-Rp-gwh"/>
+                    <connections>
+                        <outlet property="mapKit" destination="ehB-BM-aM4" id="xoQ-Vi-k5m"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXC-Qt-8Yp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
