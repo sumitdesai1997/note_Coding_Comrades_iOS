@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031FBD24266013B9003EEB3A /* note_Coding_Comrades_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 031FBD22266013B9003EEB3A /* note_Coding_Comrades_iOS.xcdatamodeld */; };
 		0355193B265F84420053613E /* NoteEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0355193A265F84420053613E /* NoteEditVC.swift */; };
 		03FBC47426578CCB00B02EE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC47326578CCB00B02EE1 /* AppDelegate.swift */; };
 		03FBC47626578CCB00B02EE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC47526578CCB00B02EE1 /* SceneDelegate.swift */; };
 		03FBC47826578CCB00B02EE1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC47726578CCB00B02EE1 /* ViewController.swift */; };
 		03FBC47B26578CCB00B02EE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03FBC47926578CCB00B02EE1 /* Main.storyboard */; };
-		03FBC47E26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC47C26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodeld */; };
 		03FBC48026578CDA00B02EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03FBC47F26578CDA00B02EE1 /* Assets.xcassets */; };
 		03FBC48326578CDA00B02EE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03FBC48126578CDA00B02EE1 /* LaunchScreen.storyboard */; };
 		03FBC48E26578CDA00B02EE1 /* note_Coding_Comrades_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC48D26578CDA00B02EE1 /* note_Coding_Comrades_iOSTests.swift */; };
@@ -39,13 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		031FBD23266013B9003EEB3A /* note_Coding_Comrades_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = note_Coding_Comrades_iOS.xcdatamodel; sourceTree = "<group>"; };
 		0355193A265F84420053613E /* NoteEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditVC.swift; sourceTree = "<group>"; };
 		03FBC47026578CCB00B02EE1 /* note_Coding_Comrades_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = note_Coding_Comrades_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03FBC47326578CCB00B02EE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03FBC47526578CCB00B02EE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		03FBC47726578CCB00B02EE1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		03FBC47A26578CCB00B02EE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		03FBC47D26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = note_Coding_Comrades_iOS.xcdatamodel; sourceTree = "<group>"; };
 		03FBC47F26578CDA00B02EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03FBC48226578CDA00B02EE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03FBC48426578CDA00B02EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		03FBC4AA2657945B00B02EE1 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				03FBC47C26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodeld */,
+				031FBD22266013B9003EEB3A /* note_Coding_Comrades_iOS.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -287,12 +287,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				03FBC47826578CCB00B02EE1 /* ViewController.swift in Sources */,
-				03FBC47E26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodeld in Sources */,
 				03FBC4B22657A1C000B02EE1 /* CategoryTVC.swift in Sources */,
 				03FBC4BA2657A4F400B02EE1 /* NoteTVC.swift in Sources */,
 				0355193B265F84420053613E /* NoteEditVC.swift in Sources */,
 				03FBC47426578CCB00B02EE1 /* AppDelegate.swift in Sources */,
 				03FBC47626578CCB00B02EE1 /* SceneDelegate.swift in Sources */,
+				031FBD24266013B9003EEB3A /* note_Coding_Comrades_iOS.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,12 +621,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		03FBC47C26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodeld */ = {
+		031FBD22266013B9003EEB3A /* note_Coding_Comrades_iOS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				03FBC47D26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodel */,
+				031FBD23266013B9003EEB3A /* note_Coding_Comrades_iOS.xcdatamodel */,
 			);
-			currentVersion = 03FBC47D26578CCB00B02EE1 /* note_Coding_Comrades_iOS.xcdatamodel */;
+			currentVersion = 031FBD23266013B9003EEB3A /* note_Coding_Comrades_iOS.xcdatamodel */;
 			path = note_Coding_Comrades_iOS.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
