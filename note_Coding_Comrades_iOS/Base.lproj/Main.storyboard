@@ -112,6 +112,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
+                        <barButtonItem title="Change category" image="move.3d" catalog="system" id="oVi-4n-1Jp"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ch0-aW-S6Z"/>
                         <barButtonItem title="Create Note" image="note.text.badge.plus" catalog="system" id="H24-Ae-u3h">
                             <connections>
@@ -358,6 +359,7 @@
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
+        <image name="move.3d" catalog="system" width="128" height="106"/>
         <image name="note.text" catalog="system" width="128" height="106"/>
         <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
