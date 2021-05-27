@@ -8,12 +8,13 @@
 import UIKit
 import MapKit
 
-class NoteEditVC: UIViewController, CLLocationManagerDelegate {
+class NoteEditVC: UIViewController {
 
     @IBOutlet weak var mapKit: MKMapView!
     
     // MAP - LOCATION VARIABLES
     var locationManager = CLLocationManager() // define location manager
+    var currentLocation: CLLocationCoordinate2D? = nil // set current location variable
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,4 +39,22 @@ class NoteEditVC: UIViewController, CLLocationManagerDelegate {
     }
     */
 
+}
+
+extension NoteEditVC : CLLocationManagerDelegate{
+    // gets the current location and creates the annotation for it, as well as centers the map into the region closer to the location
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations[0] // gets the location of the user
+        
+        let latitude = userLocation.coordinate.latitude // user latitude
+        let longitude = userLocation.coordinate.longitude // user longitude
+        
+        let latDelta: CLLocationDegrees = 0.2 // latitude delta
+        let lngDelta: CLLocationDegrees = 0.2 // longitude delta
+        let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lngDelta) // sets the span for the coordinates
+        
+        currentLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) // sets the current location into the global variable
+        
+        mapKit.setRegion(MKCoordinateRegion(center: currentLocation!, span: span), animated: true) // sets the region for the map
+    }
 }
