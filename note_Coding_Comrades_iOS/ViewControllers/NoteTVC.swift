@@ -43,6 +43,18 @@ class NoteTVC: UITableViewController {
         return cell
     }
     
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteNote(note: noteList[indexPath.row])
+            saveNotes()
+            noteList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
     // fetching the notes from the core data
     func fetchNotes(predicate: NSPredicate? = nil) {
         let request: NSFetchRequest<Note> = Note.fetchRequest()
@@ -87,6 +99,11 @@ class NoteTVC: UITableViewController {
         } catch {
             print("Error saving the notes \(error.localizedDescription)")
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nevc = segue.destination as! NoteEditVC
+        nevc.delegate = self
     }
 
 }
