@@ -119,7 +119,13 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Notes" id="scV-VS-v2d"/>
+                    <navigationItem key="navigationItem" title="Notes" id="scV-VS-v2d">
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="Qm7-EL-dFO">
+                            <connections>
+                                <action selector="menuClick:" destination="7Pl-t2-Bfy" id="Dl2-C2-lm4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zhv-EK-GqR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
