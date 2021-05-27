@@ -152,6 +152,12 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         }
     }
     
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(success: false)
+        }
+    }
+    
     
     //*************** MAP HANDLING ******************************
     // creates an annotation depending on the coordinates
