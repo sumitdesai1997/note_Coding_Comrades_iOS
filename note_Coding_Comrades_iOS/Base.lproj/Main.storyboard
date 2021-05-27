@@ -63,7 +63,13 @@
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ADJ-yz-cxg"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH"/>
+                    <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="CWc-ob-qeR">
+                            <connections>
+                                <action selector="toggleEditable:" destination="wRb-zj-fGq" id="foO-wp-JYm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PrF-8V-wvz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

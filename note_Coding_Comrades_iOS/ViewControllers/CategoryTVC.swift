@@ -12,6 +12,7 @@ class CategoryTVC: UITableViewController {
 
     // creating a category list array to store the categories
     var categoryList = [Category]()
+    var isEditable = false
     
     // creating context object to work with core data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -83,6 +84,19 @@ class CategoryTVC: UITableViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    // to provide the edit funationality
+    @IBAction func toggleEditable(_ sender: Any) {
+        isEditable = !isEditable
+        tableView.setEditing(isEditable, animated: true)
+    }
+    
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
     
     // loading from from core data
     func fetchCategoryList() {
