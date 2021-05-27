@@ -7,11 +7,17 @@
 
 import UIKit
 import MapKit
+import AVFoundation
 
-class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-
+class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, AVAudioRecorderDelegate {
+    
     @IBOutlet weak var mapKit: MKMapView!
     @IBOutlet weak var notePictureImg: UIImageView!
+    
+    // AUDIO VARIABLES
+    var recordButton: UIButton!
+    var recordingSession: AVAudioSession!
+    var audioRecorder: AVAudioRecorder!
     
     // MAP - LOCATION VARIABLES
     var locationManager = CLLocationManager() // define location manager
