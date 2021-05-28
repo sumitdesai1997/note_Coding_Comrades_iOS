@@ -203,9 +203,6 @@
                                                 <state key="normal" title="Take Picture">
                                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="takePictureClick:" destination="X4X-3d-swQ" eventType="touchUpInside" id="CRw-LI-Cio"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iq5-ju-hH1">
                                                 <rect key="frame" x="227" y="319" width="130" height="34"/>
@@ -351,7 +348,9 @@
                         <outlet property="recordBtn" destination="Vrd-Dk-K8m" id="tgJ-O6-t5w"/>
                         <outlet property="saveButton" destination="iHl-tV-2Yr" id="cdb-3Z-0d4"/>
                         <outlet property="scrubberSld" destination="Tgb-4m-Hr9" id="GCm-tH-qOe"/>
+                        <outlet property="takePictureBtn" destination="5Hm-9U-1XH" id="msm-SK-c5n"/>
                         <outlet property="titleTF" destination="KRx-nL-clj" id="4Zs-7j-QY0"/>
+                        <outlet property="uploadPictureBtn" destination="iq5-ju-hH1" id="BQk-Ai-OuZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXC-Qt-8Yp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

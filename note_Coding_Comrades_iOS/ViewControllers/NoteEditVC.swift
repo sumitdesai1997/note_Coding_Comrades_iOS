@@ -16,7 +16,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var detailsTF: UITextView!
-    
+    @IBOutlet weak var takePictureBtn: UIButton!
+    @IBOutlet weak var uploadPictureBtn: UIButton!
 
     var delegate : NoteTVC?
     var selectedNote : Note? {
@@ -79,6 +80,16 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         
         if let coordinateX = selectedNote?.coordinateX, let coordinateY = selectedNote?.coordinateY{
         getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateX), longitude: CLLocationDegrees(coordinateY)))
+        }
+        
+        if(selectedNote == nil){
+            notePictureImg.isHidden = true
+            playBtn.isHidden = true
+            scrubberSld.isHidden = true
+        } else {
+            takePictureBtn.isHidden = true
+            uploadPictureBtn.isHidden = true
+            recordBtn.isHidden = true
         }
     }
     
@@ -161,6 +172,9 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         }
         
         notePictureImg.image = image
+        notePictureImg.isHidden = false
+        takePictureBtn.isHidden = true
+        uploadPictureBtn.isHidden = true
         // print out the image size as a test
         print(image.size)
     }
@@ -243,6 +257,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             }
                    
         audioRecorder = nil
+        playBtn.isHidden = false
+        scrubberSld.isHidden = false
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
