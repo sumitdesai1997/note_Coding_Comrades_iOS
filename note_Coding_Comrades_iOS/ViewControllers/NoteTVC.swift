@@ -17,8 +17,13 @@ class NoteTVC: UITableViewController {
     // search bar object
     let searchBar = UISearchController(searchResultsController: nil)
     
+    var currentPredicate : NSPredicate? = nil
+    var ascendingSort = true
+    var sortingType = "title"
+    
     var selectedCategory : Category? = nil {
         didSet{
+            navigationItem.title = selectedCategory?.name
             fetchNotes()
         }
     }
@@ -74,7 +79,8 @@ class NoteTVC: UITableViewController {
     func fetchNotes(predicate: NSPredicate? = nil) {
         let request: NSFetchRequest<Note> = Note.fetchRequest()
         let categoryPredicate = NSPredicate(format: "parentCategory.name=%@", selectedCategory!.name!)
-        
+        request.sortDescriptors = [NSSortDescriptor(key: sortingType , ascending: ascendingSort)]
+
         if let searchPredicate = predicate {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, searchPredicate])
         } else {
@@ -124,7 +130,7 @@ class NoteTVC: UITableViewController {
     func showSearchBar() {
         searchBar.searchBar.delegate = self
         searchBar.obscuresBackgroundDuringPresentation = false
-        searchBar.searchBar.placeholder = "Search"
+        searchBar.searchBar.placeholder = "Search note by name"
         navigationItem.searchController = searchBar
         definesPresentationContext = true
         searchBar.searchBar.searchTextField.textColor = .black
@@ -159,6 +165,12 @@ class NoteTVC: UITableViewController {
         let menu = UIMenu(title: "Sort", children: [title, date])
         sender.menu = menu
     }
+    
+    // shake motion
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        ascendingSort = !ascendingSort
+        fetchNotes(predicate: currentPredicate)
+    }
 
 }
 
@@ -167,13 +179,15 @@ extension NoteTVC: UISearchBarDelegate{
     // method to search the products as per the user input after click on search button on keyboard
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         // add predicate
-        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-        fetchNotes(predicate: predicate)
+        currentPredicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        
+        fetchNotes(predicate: currentPredicate)
     }
     
     // method for cancle button click near search bar
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         fetchNotes()
+        currentPredicate = nil
         DispatchQueue.main.async {
             searchBar.resignFirstResponder()
         }
@@ -183,7 +197,7 @@ extension NoteTVC: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             fetchNotes()
-            
+            currentPredicate = nil
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }
