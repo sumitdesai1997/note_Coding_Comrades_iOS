@@ -106,6 +106,9 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="X4X-3d-swQ" kind="show" identifier="toEditNote" id="BhO-bq-oHc"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -334,7 +337,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eNA-Rp-gwh">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="iHl-tV-2Yr"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="iHl-tV-2Yr">
+                            <connections>
+                                <action selector="saveNote:" destination="X4X-3d-swQ" id="SAH-J0-Gld"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="detailsTF" destination="WOT-hk-gYt" id="3Zf-QO-g7y"/>
@@ -374,6 +381,9 @@
             <point key="canvasLocation" x="-1583" y="50"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="BhO-bq-oHc"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
         <image name="folder.fill" catalog="system" width="128" height="97"/>

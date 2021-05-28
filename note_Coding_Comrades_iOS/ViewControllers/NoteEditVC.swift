@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import AVFoundation
 
-class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, AVAudioRecorderDelegate {
+class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, AVAudioRecorderDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapKit: MKMapView!
     @IBOutlet weak var notePictureImg: UIImageView!
@@ -17,7 +17,15 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var detailsTF: UITextView!
     
+
     var delegate : NoteTVC?
+    var selectedNote : Note? {
+        didSet{
+            loadNote()
+        }
+    }
+    
+    var editNote: Note?
     
     // AUDIO VARIABLES
     var recordingSession: AVAudioSession!
@@ -63,18 +71,51 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         }
     }
     
+    func loadNote(){
+        if selectedNote != nil {
+//
+//            titleTF.text = selectedNote!.title
+//            detailsTF.text = selectedNote!.details
+//            notePictureImg.image = UIImage(data: (selectedNote!.image)!)
+//            getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(selectedNote!.coordinateX), longitude: CLLocationDegrees(selectedNote!.coordinateY)))
+//            do {
+//                try audioPlayer = AVAudioPlayer(data: (selectedNote!.audio)!)
+//                audioPlayer.pause()
+//                audioPlayer.currentTime = 0
+//                playBtn.isEnabled = true
+//                scrubberSld.isEnabled = true
+//                recordBtn.tintColor = .systemBlue
+//            } catch {
+//                print(error)
+//            }
+        }
+    }
+//    @IBAction func saveNote(_ sender: Any) {
+//
+//
+//    }
     override func viewWillDisappear(_ animated: Bool) {
         guard titleTF.text != "" && detailsTF.text != "" else {return}
+        if (selectedNote == nil){
+            selectedNote =  Note(context: delegate!.context)
+            selectedNote?.parentCategory = delegate?.selectedCategory
+        }
+        selectedNote?.title = titleTF.text
+        selectedNote?.details = detailsTF.text
+        selectedNote?.coordinateX = userLocation.coordinate.latitude
+        selectedNote?.coordinateY = userLocation.coordinate.longitude
+        selectedNote?.date = Date()
+//
+//        if notePictureImg.image!.pngData()! != nil {
+//            selectedNote?.image = notePictureImg.image!.pngData()!
+//        }
+        if (audioURL != nil){
+            selectedNote?.audio = try? Data(contentsOf: audioURL!)
+        }
         
-        let png = notePictureImg.image!.pngData()!
-        let audio = try? Data(contentsOf: audioURL!)
-        let coordinateX = userLocation.coordinate.latitude
-        let coordinateY = userLocation.coordinate.longitude
-        let date = Date()
-        
-        delegate!.updateNote(title: titleTF.text!, details: detailsTF.text!, image: png, audio: audio!, coordinateX: coordinateX, coordinateY: coordinateY, date: date)
+        delegate!.saveNotes()
    }
-    
+//
     //*************** IMAGE HANDLING ******************************
     @IBAction func takePictureClick(_ sender: Any) {
         if !UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -205,11 +246,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     //*************** MAP HANDLING ******************************
     // creates an annotation depending on the coordinates
     func addAnnotation(coordinate: CLLocationCoordinate2D, title: String, subtitle: String ){
-        let annotation = MKPointAnnotation() // creates the point annotation object
-        annotation.title = title // sets the annotation title
-        annotation.subtitle = subtitle // sets the annotation subtitle
-        annotation.coordinate = coordinate // sets the annotation coordinate
-        mapKit.addAnnotation(annotation) // adds the annotation to the map
+        
+
     }
     
     func getLocation(coordinate: CLLocationCoordinate2D){
@@ -220,10 +258,21 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
                 print("error reverseGeocodeLocation" , error!) // print the error
             } else {
                 if let placemark = placemarks?[0] {
-//                    placemark.country
-//                    placemark.administrativeArea
-//                    placemark.locality
-                    self.addAnnotation(coordinate: coordinate, title: "", subtitle: "" )
+                    self.mapKit.removeAnnotations(self.mapKit.annotations)
+                    let latDelta: CLLocationDegrees = 0.2 // latitude delta
+                    let lngDelta: CLLocationDegrees = 0.2 // longitude delta
+                    let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lngDelta) // sets the span for the coordinates
+                    self.mapKit.setRegion(MKCoordinateRegion(center: coordinate, span: span), animated: true) // sets the region for the map
+                    
+                    let annotation = MKPointAnnotation() // creates the point annotation object
+                    let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin") // create the annotation view
+                    annotationView.animatesDrop = true // set true annotation animation
+                    annotationView.canShowCallout = true // set true can show callout
+                    annotationView.pinTintColor = UIColor.cyan
+                    annotation.title = "Your Location" // sets the annotation title
+                    annotation.subtitle = placemark.locality! + ", " + placemark.administrativeArea! + ", " + placemark.country! // sets the annotation subtitle
+                    annotation.coordinate = coordinate // sets the annotation coordinate
+                    self.mapKit.addAnnotation(annotation) // adds the annotation to the map
                 }
             }
         }
@@ -243,23 +292,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
 }
 
 //MARK: - MKMap Extension Class
-extension NoteEditVC: MKMapViewDelegate {
-    // ViewFor annotation method
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        if annotation is MKUserLocation { // if the annotation is the user location
-            return nil // return nothing
-        }
-        
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin" + annotation.title!!) // create the annotation view
-        annotationView.animatesDrop = true // set true annotation animation
-        annotationView.canShowCallout = true // set true can show callout
-//        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) // set callout button
-        annotationView.pinTintColor = UIColor.cyan
-        return annotationView
-    }
-    
-}
 
 extension NoteEditVC : CLLocationManagerDelegate{
     // gets the current location and creates the annotation for it, as well as centers the map into the region closer to the location
@@ -268,15 +300,8 @@ extension NoteEditVC : CLLocationManagerDelegate{
         
         let latitude = userLocation.coordinate.latitude // user latitude
         let longitude = userLocation.coordinate.longitude // user longitude
-        
-        let latDelta: CLLocationDegrees = 0.2 // latitude delta
-        let lngDelta: CLLocationDegrees = 0.2 // longitude delta
-        let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lngDelta) // sets the span for the coordinates
-        
-        currentLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) // sets the current location into the global variable
-        
-        mapKit.setRegion(MKCoordinateRegion(center: currentLocation!, span: span), animated: true) // sets the region for the map
-        
-        addAnnotation(coordinate: currentLocation!, title: "Current Location", subtitle: "You are here" ) // sets the annotation
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) // sets the current location into the global variable
+        getLocation(coordinate: coordinate)
+
     }
 }

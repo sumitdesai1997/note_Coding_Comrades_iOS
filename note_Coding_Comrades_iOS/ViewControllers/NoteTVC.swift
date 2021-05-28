@@ -22,10 +22,16 @@ class NoteTVC: UITableViewController {
             fetchNotes()
         }
     }
+    
+    var selectedNote : Note? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         
         showSearchBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchNotes()
     }
     
     // MARK: - Table view data source
@@ -37,7 +43,7 @@ class NoteTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print("notelist: \(noteList.count)")
+//        print("notelist: \(noteList.count)")
         return noteList.count
     }
     
@@ -58,6 +64,10 @@ class NoteTVC: UITableViewController {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedNote = noteList[indexPath.row]
     }
     
     // fetching the notes from the core data
@@ -91,7 +101,7 @@ class NoteTVC: UITableViewController {
         newNote.title = title
         newNote.details = details
         newNote.image = image
-        newNote.audio = nil
+        newNote.audio = audio
         newNote.coordinateX = coordinateX
         newNote.coordinateY = coordinateY
         newNote.parentCategory = selectedCategory
@@ -123,6 +133,9 @@ class NoteTVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nevc = segue.destination as! NoteEditVC
         nevc.delegate = self
+        if let indexPath = tableView.indexPathForSelectedRow {
+            nevc.selectedNote = noteList[indexPath.row]
+        }
     }
     
     // sort functionality as per the user choice between title or date
