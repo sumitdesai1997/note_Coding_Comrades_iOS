@@ -19,6 +19,13 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     @IBOutlet weak var takePictureBtn: UIButton!
     @IBOutlet weak var uploadPictureBtn: UIButton!
 
+    @IBOutlet weak var takePictureHeight: NSLayoutConstraint!
+    @IBOutlet weak var uploadPictureHeight: NSLayoutConstraint!
+    @IBOutlet weak var notePictureHeight: NSLayoutConstraint!
+    @IBOutlet weak var recordWidth: NSLayoutConstraint!
+    @IBOutlet weak var playHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrubberWidth: NSLayoutConstraint!
+    
     var delegate : NoteTVC?
     var selectedNote : Note?
     
@@ -63,9 +70,14 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         }
         
         if(selectedNote == nil){
-            notePictureImg.isHidden = true
-            playBtn.isHidden = true
-            scrubberSld.isHidden = true
+            
+//            notePictureHeight.constant = 0
+//            notePictureImg.isHidden = true
+//            view.layoutIfNeeded()
+            
+            viewVisibility(constraint: notePictureHeight, button: notePictureImg, hide: true, constant: 0)
+            viewVisibility(constraint: playHeight, button: playBtn, hide: true, constant: 0)
+            viewVisibility(constraint: scrubberWidth, button: scrubberSld, hide: true, constant: 0)
         } else {
            
             // pre-populating the data if exist in selected data
@@ -73,6 +85,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             detailsTF.text = selectedNote?.details
             if let image = selectedNote?.image{
                 notePictureImg.image = UIImage(data: image)
+            } else {
+                viewVisibility(constraint: notePictureHeight, button: notePictureImg, hide: true, constant: 0)
             }
             
             if let coordinateX = selectedNote?.coordinateX, let coordinateY = selectedNote?.coordinateY{
@@ -90,14 +104,16 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
                     print(error)
                 }
             } else {
-                scrubberSld.isHidden = true
-                playBtn.isHidden = true
+                viewVisibility(constraint: playHeight, button: playBtn, hide: true, constant: 0)
+                viewVisibility(constraint: scrubberWidth, button: scrubberSld, hide: true, constant: 0)
             }
             
-            takePictureBtn.isHidden = true
-            uploadPictureBtn.isHidden = true
-            recordBtn.isHidden = true
+            viewVisibility(constraint: takePictureHeight, button: takePictureBtn, hide: true, constant: 0)
+            viewVisibility(constraint: uploadPictureHeight, button: uploadPictureBtn, hide: true, constant: 0)
+            viewVisibility(constraint: recordWidth, button: recordBtn, hide: true, constant: 0)
         }
+        
+    	
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -125,6 +141,14 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         
         delegate!.saveNotes()
    }
+    
+    func viewVisibility(constraint: NSLayoutConstraint, button: UIView, hide: Bool, constant: Double){
+        
+        constraint.constant = CGFloat(constant)
+        button.isHidden = hide
+        view.layoutIfNeeded()
+    }
+
 //
     //*************** IMAGE HANDLING ******************************
     @IBAction func takePictureClick(_ sender: Any) {
@@ -161,10 +185,13 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             return
         }
         
+        viewVisibility(constraint: notePictureHeight, button: notePictureImg, hide: false, constant: 128)
+        
         notePictureImg.image = image
-        notePictureImg.isHidden = false
-        takePictureBtn.isHidden = true
-        uploadPictureBtn.isHidden = true
+        
+        viewVisibility(constraint: takePictureHeight, button: takePictureBtn, hide: true, constant: 0)
+        viewVisibility(constraint: uploadPictureHeight, button: uploadPictureBtn, hide: true, constant: 0)
+
         // print out the image size as a test
         print(image.size)
     }
@@ -247,8 +274,10 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             }
                    
         audioRecorder = nil
-        playBtn.isHidden = false
-        scrubberSld.isHidden = false
+        viewVisibility(constraint: playHeight, button: playBtn, hide: false, constant: 30)
+        viewVisibility(constraint: scrubberWidth, button: scrubberSld, hide: false, constant: 150)
+        
+        
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
@@ -285,7 +314,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
                     annotationView.canShowCallout = true // set true can show callout
                     annotationView.pinTintColor = UIColor.cyan
                     annotation.title = "Your Location" // sets the annotation title
-                    annotation.subtitle = placemark.locality! + ", " + placemark.administrativeArea! + ", " + placemark.country! // sets the annotation subtitle
+                    annotation.subtitle = "" // sets the annotation subtitle
                     annotation.coordinate = coordinate // sets the annotation coordinate
                     self.mapKit.addAnnotation(annotation) // adds the annotation to the map
                 }
