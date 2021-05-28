@@ -69,12 +69,23 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         } catch {
             // failed to record!
         }
+        
+        // pre-populating the data if exist in selected data
+        titleTF.text = selectedNote?.title
+        detailsTF.text = selectedNote?.details
+        if(titleTF.text != ""){
+            notePictureImg.image = UIImage(data: (selectedNote?.image)!)
+        }
+        
+        if let coordinateX = selectedNote?.coordinateX, let coordinateY = selectedNote?.coordinateY{
+        getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateX), longitude: CLLocationDegrees(coordinateY)))
+        }
     }
     
     func loadNote(){
         if selectedNote != nil {
-//
-//            titleTF.text = selectedNote!.title
+
+//            titleTF.text = selectedNote?.title
 //            detailsTF.text = selectedNote!.details
 //            notePictureImg.image = UIImage(data: (selectedNote!.image)!)
 //            getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(selectedNote!.coordinateX), longitude: CLLocationDegrees(selectedNote!.coordinateY)))
@@ -88,12 +99,10 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
 //            } catch {
 //                print(error)
 //            }
-        }
+//        }
+     }
     }
-//    @IBAction func saveNote(_ sender: Any) {
-//
-//
-//    }
+
     override func viewWillDisappear(_ animated: Bool) {
         guard titleTF.text != "" && detailsTF.text != "" else {return}
         if (selectedNote == nil){

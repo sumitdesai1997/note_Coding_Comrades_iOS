@@ -133,9 +133,12 @@ class NoteTVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nevc = segue.destination as! NoteEditVC
         nevc.delegate = self
-        if let indexPath = tableView.indexPathForSelectedRow {
-            nevc.selectedNote = noteList[indexPath.row]
-        }
+        
+        if let cell = sender as? UITableViewCell {
+           if let index = tableView.indexPath(for: cell)?.row {
+               nevc.selectedNote = noteList[index]
+           }
+       }
     }
     
     // sort functionality as per the user choice between title or date
