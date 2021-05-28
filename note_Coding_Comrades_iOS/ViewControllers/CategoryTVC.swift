@@ -66,7 +66,8 @@ class CategoryTVC: UITableViewController {
         let alert = UIAlertController(title: "Create new category", message: "please give a name", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { (action) in
             let categoryNames = self.categoryList.map {$0.name?.lowercased()}
-            guard !categoryNames.contains(textField.text?.lowercased()) else {return}
+            guard !categoryNames.contains(textField.text?.lowercased()) else {return self.showAlert()}
+            
             let newCategory = Category(context: self.context)
             newCategory.name = textField.text!
             self.categoryList.append(newCategory)
@@ -83,6 +84,14 @@ class CategoryTVC: UITableViewController {
             textField.placeholder = "Category name"
         }
         
+        present(alert, animated: true, completion: nil)
+    }
+    
+    /// show alert when the name of the folder is taken
+    func showAlert() {
+        let alert = UIAlertController(title: "Name Taken", message: "Please choose another name", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
     
