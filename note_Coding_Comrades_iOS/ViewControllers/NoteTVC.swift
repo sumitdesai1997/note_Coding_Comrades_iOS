@@ -86,12 +86,12 @@ class NoteTVC: UITableViewController {
     }
     
     // updating the note into core data
-    func updateNote(title: String, details: String, image: Data, audio: String, coordinateX: Double, coordinateY: Double, date: Date) {
+    func updateNote(title: String, details: String, image: Data, audio: Data, coordinateX: Double, coordinateY: Double, date: Date) {
         let newNote = Note(context: context)
         newNote.title = title
         newNote.details = details
         newNote.image = image
-        newNote.audio = audio
+        newNote.audio = nil
         newNote.coordinateX = coordinateX
         newNote.coordinateY = coordinateY
         newNote.parentCategory = selectedCategory

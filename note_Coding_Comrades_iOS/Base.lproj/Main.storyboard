@@ -3,6 +3,8 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -223,20 +225,34 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DS-HT-mCJ">
-                                                <rect key="frame" x="20" y="563" width="49" height="22"/>
-                                                <state key="normal" title="Play" image="play.fill" catalog="system"/>
+                                                <rect key="frame" x="20" y="563" width="18.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" name="AccentColor"/>
+                                                    <imageReference key="image" image="play.fill" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="playClick:" destination="X4X-3d-swQ" eventType="touchUpInside" id="xvI-dF-Irp"/>
+                                                </connections>
                                             </button>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Tgb-4m-Hr9">
-                                                <rect key="frame" x="87" y="563" width="154" height="31"/>
+                                                <rect key="frame" x="56.5" y="563" width="154" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="5Jz-Al-4cY"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="scrubberChange:" destination="X4X-3d-swQ" eventType="valueChanged" id="3F5-x6-JqU"/>
+                                                </connections>
                                             </slider>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vrd-Dk-K8m">
-                                                <rect key="frame" x="259" y="563" width="75" height="22"/>
-                                                <state key="normal" title="Record" image="mic.fill" catalog="system"/>
+                                                <rect key="frame" x="228.5" y="563" width="20" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <state key="normal" image="mic.fill" catalog="system">
+                                                    <color key="titleColor" name="AccentColor"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                                </state>
                                                 <connections>
-                                                    <action selector="recordingClick:" destination="X4X-3d-swQ" eventType="touchUpInside" id="6Eo-mk-jU7"/>
+                                                    <action selector="recordingClick:" destination="X4X-3d-swQ" eventType="touchUpInside" id="sR6-y6-AeQ"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="550-WD-mUG">
@@ -317,7 +333,10 @@
                         <outlet property="detailsTF" destination="WOT-hk-gYt" id="3Zf-QO-g7y"/>
                         <outlet property="mapKit" destination="ehB-BM-aM4" id="xoQ-Vi-k5m"/>
                         <outlet property="notePictureImg" destination="Tns-cg-sFU" id="kPV-kY-ppw"/>
+                        <outlet property="playBtn" destination="9DS-HT-mCJ" id="mTw-DM-dtJ"/>
+                        <outlet property="recordBtn" destination="Vrd-Dk-K8m" id="tgJ-O6-t5w"/>
                         <outlet property="saveButton" destination="iHl-tV-2Yr" id="cdb-3Z-0d4"/>
+                        <outlet property="scrubberSld" destination="Tgb-4m-Hr9" id="GCm-tH-qOe"/>
                         <outlet property="titleTF" destination="KRx-nL-clj" id="4Zs-7j-QY0"/>
                     </connections>
                 </viewController>
@@ -355,6 +374,9 @@
         <image name="note.text" catalog="system" width="128" height="106"/>
         <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

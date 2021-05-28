@@ -43,6 +43,7 @@ class CategoryTVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory", for: indexPath)
                 
         cell.textLabel?.text = categoryList[indexPath.row].name
+        cell.detailTextLabel?.text = String(categoryList[indexPath.row].notes!.count)
         return cell
     }
     

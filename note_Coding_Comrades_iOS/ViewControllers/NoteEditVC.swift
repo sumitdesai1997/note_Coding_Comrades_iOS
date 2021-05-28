@@ -22,7 +22,9 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     // AUDIO VARIABLES
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
-    
+    var audioPlayer: AVAudioPlayer!
+    var audioURL: URL? = nil
+
     // MAP - LOCATION VARIABLES
     var locationManager = CLLocationManager() // define location manager
     var currentLocation: CLLocationCoordinate2D? = nil // set current location variable
@@ -32,7 +34,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         mapKit.showsUserLocation = false // show user location
         mapKit.isZoomEnabled = false// disable zoom
         
@@ -46,7 +47,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         recordingSession = AVAudioSession.sharedInstance()
 
         do {
-            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setCategory(.record, mode: .default)
             try recordingSession.setActive(true)
             recordingSession.requestRecordPermission() { [unowned self] allowed in
                 DispatchQueue.main.async {
@@ -66,12 +67,12 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         guard titleTF.text != "" && detailsTF.text != "" else {return}
         
         let png = notePictureImg.image!.pngData()!
-        let audio = ""
+        let audio = try? Data(contentsOf: audioURL!)
         let coordinateX = userLocation.coordinate.latitude
         let coordinateY = userLocation.coordinate.longitude
         let date = Date()
         
-        delegate!.updateNote(title: titleTF.text!, details: detailsTF.text!, image: png, audio: audio, coordinateX: coordinateX, coordinateY: coordinateY, date: date)
+        delegate!.updateNote(title: titleTF.text!, details: detailsTF.text!, image: png, audio: audio!, coordinateX: coordinateX, coordinateY: coordinateY, date: date)
    }
     
     //*************** IMAGE HANDLING ******************************
@@ -115,8 +116,30 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     }
     
     //*************** AUDIO HANDLING ******************************
+    @IBOutlet weak var scrubberSld: UISlider!
+   
+    @IBOutlet weak var recordBtn: UIButton!
+    @IBOutlet weak var playBtn: UIButton!
     
-    
+    @IBAction func scrubberChange(_ sender: UISlider) {
+        if sender.isEnabled {
+            sender.value = Float(audioPlayer.currentTime)
+            if scrubberSld.value == sender.minimumValue{
+                playBtn.setImage(UIImage(systemName: "play.fill"), for: [])
+            }
+        }
+
+    }
+    @IBAction func playClick(_ sender: UIButton) {
+        if audioPlayer.isPlaying{
+            sender.setImage(UIImage(systemName: "play.fill"), for:[])
+            audioPlayer.pause()
+        }else{
+            sender.setImage( UIImage(systemName: "pause.fill"), for: [])
+            audioPlayer.play()
+
+        }
+    }
     @IBAction func recordingClick(_ sender: UIButton) {
         if audioRecorder == nil {
                 startRecording()
@@ -126,6 +149,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     }
     
     func startRecording() {
+        recordBtn.tintColor = .systemRed
         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
 
         let settings = [
@@ -154,6 +178,20 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     
     func finishRecording(success: Bool) {
         audioRecorder.stop()
+        audioURL = audioRecorder?.url
+        let audioData =  try? Data(contentsOf: audioURL!)
+        
+            do {
+                try audioPlayer = AVAudioPlayer(data: audioData!)
+                audioPlayer.pause()
+                audioPlayer.currentTime = 0
+                playBtn.isEnabled = true
+                scrubberSld.isEnabled = true
+                recordBtn.tintColor = .systemBlue
+            } catch {
+                print(error)
+            }
+                   
         audioRecorder = nil
     }
     
