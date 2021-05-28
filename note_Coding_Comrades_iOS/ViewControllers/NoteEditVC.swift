@@ -62,34 +62,35 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             // failed to record!
         }
         
-        // pre-populating the data if exist in selected data
-        titleTF.text = selectedNote?.title
-        detailsTF.text = selectedNote?.details
-        if(titleTF.text != ""){
-            notePictureImg.image = UIImage(data: (selectedNote?.image)!)
-        }
-        
-        if let coordinateX = selectedNote?.coordinateX, let coordinateY = selectedNote?.coordinateY{
-        getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateX), longitude: CLLocationDegrees(coordinateY)))
-        }
-        
-        if(titleTF.text != ""){
-            do {
-                try audioPlayer = AVAudioPlayer(data: (selectedNote?.audio!)!)
-                audioPlayer.pause()
-                audioPlayer.currentTime = 0
-                playBtn.isEnabled = true
-                scrubberSld.isEnabled = true
-            } catch {
-                print(error)
-            }
-        }
-        
         if(selectedNote == nil){
             notePictureImg.isHidden = true
             playBtn.isHidden = true
             scrubberSld.isHidden = true
         } else {
+           
+            // pre-populating the data if exist in selected data
+            titleTF.text = selectedNote?.title
+            detailsTF.text = selectedNote?.details
+            if let image = selectedNote?.image{
+                notePictureImg.image = UIImage(data: image)
+            }
+            
+            if let coordinateX = selectedNote?.coordinateX, let coordinateY = selectedNote?.coordinateY{
+            getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateX), longitude: CLLocationDegrees(coordinateY)))
+            }
+            
+            if let audio = selectedNote?.audio{
+                do {
+                    try audioPlayer = AVAudioPlayer(data: audio)
+                    audioPlayer.pause()
+                    audioPlayer.currentTime = 0
+                    playBtn.isEnabled = true
+                    scrubberSld.isEnabled = true
+                } catch {
+                    print(error)
+                }
+            }
+            
             takePictureBtn.isHidden = true
             uploadPictureBtn.isHidden = true
             recordBtn.isHidden = true
