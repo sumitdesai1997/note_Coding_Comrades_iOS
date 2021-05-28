@@ -20,11 +20,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     @IBOutlet weak var uploadPictureBtn: UIButton!
 
     var delegate : NoteTVC?
-    var selectedNote : Note? {
-        didSet{
-            loadNote()
-        }
-    }
+    var selectedNote : Note?
     
     var editNote: Note?
     
@@ -60,11 +56,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             try recordingSession.setActive(true)
             recordingSession.requestRecordPermission() { [unowned self] allowed in
                 DispatchQueue.main.async {
-//                    if allowed {
-//                        self.loadRecordingUI()
-//                    } else {
-//                        // failed to record!
-//                    }
                 }
             }
         } catch {
@@ -91,27 +82,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             uploadPictureBtn.isHidden = true
             recordBtn.isHidden = true
         }
-    }
-    
-    func loadNote(){
-        if selectedNote != nil {
-
-//            titleTF.text = selectedNote?.title
-//            detailsTF.text = selectedNote!.details
-//            notePictureImg.image = UIImage(data: (selectedNote!.image)!)
-//            getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(selectedNote!.coordinateX), longitude: CLLocationDegrees(selectedNote!.coordinateY)))
-//            do {
-//                try audioPlayer = AVAudioPlayer(data: (selectedNote!.audio)!)
-//                audioPlayer.pause()
-//                audioPlayer.currentTime = 0
-//                playBtn.isEnabled = true
-//                scrubberSld.isEnabled = true
-//                recordBtn.tintColor = .systemBlue
-//            } catch {
-//                print(error)
-//            }
-//        }
-     }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -300,18 +270,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             }
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 //MARK: - MKMap Extension Class
