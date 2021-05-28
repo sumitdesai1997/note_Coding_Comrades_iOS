@@ -124,6 +124,25 @@ class NoteTVC: UITableViewController {
         let nevc = segue.destination as! NoteEditVC
         nevc.delegate = self
     }
+    
+    // sort functionality as per the user choice between title or date
+    @IBAction func menuClick(_ sender: UIBarButtonItem) {
+        let title = UIAction(title: " Sort by title"){ _ in
+            print("title tapped")
+            self.noteList = self.noteList.sorted(by: { (note1: Note, note2: Note) -> Bool in
+                return note1.title! < note2.title!
+            })
+            self.tableView.reloadData()
+        }
+        let date = UIAction(title: " Sort by date"){ _ in
+            self.noteList = self.noteList.sorted(by: { (note1: Note, note2: Note) -> Bool in
+                return note1.date! > note2.date!
+            })
+            self.tableView.reloadData()
+        }
+        let menu = UIMenu(title: "Sort", children: [title, date])
+        sender.menu = menu
+    }
 
 }
 
