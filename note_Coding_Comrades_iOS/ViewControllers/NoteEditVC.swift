@@ -125,10 +125,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         selectedNote?.coordinateX = userLocation.coordinate.latitude
         selectedNote?.coordinateY = userLocation.coordinate.longitude
         selectedNote?.date = Date()
-//
-//        if notePictureImg.image!.pngData()! != nil {
-//            selectedNote?.image = notePictureImg.image!.pngData()!
-//        }
+        selectedNote?.image = notePictureImg.image!.pngData()!
+        
         if (audioURL != nil){
             selectedNote?.audio = try? Data(contentsOf: audioURL!)
         }
