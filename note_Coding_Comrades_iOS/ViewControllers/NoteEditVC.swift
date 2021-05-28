@@ -73,6 +73,18 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateX), longitude: CLLocationDegrees(coordinateY)))
         }
         
+        if(titleTF.text != ""){
+            do {
+                try audioPlayer = AVAudioPlayer(data: (selectedNote?.audio!)!)
+                audioPlayer.pause()
+                audioPlayer.currentTime = 0
+                playBtn.isEnabled = true
+                scrubberSld.isEnabled = true
+            } catch {
+                print(error)
+            }
+        }
+        
         if(selectedNote == nil){
             notePictureImg.isHidden = true
             playBtn.isHidden = true
@@ -210,7 +222,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        print("path: \(paths[0])")
+        print("path for audio: \(paths[0])")
         return paths[0]
     }
     
