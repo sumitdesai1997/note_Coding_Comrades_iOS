@@ -14,16 +14,20 @@ class CategoryTVC: UITableViewController {
     var categoryList = [Category]()
     var isEditable = false
     
+    let categorySearchBar = UISearchController(searchResultsController: nil)
+
     // creating context object to work with core data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // reloading the table data just before screen appear
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showCategorySearchBar()
         fetchCategoryList()
     }
     // MARK: - Table view data source
@@ -109,9 +113,15 @@ class CategoryTVC: UITableViewController {
     
     
     // loading from from core data
-    func fetchCategoryList() {
+    func fetchCategoryList(categoryPredicate: NSPredicate? = nil) {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
-
+        
+        if let searchPredicate = categoryPredicate {
+            request.predicate = searchPredicate
+        } else {
+            
+        }
+        
         do {
             categoryList = try context.fetch(request)
         } catch {
@@ -146,5 +156,44 @@ class CategoryTVC: UITableViewController {
             ntvc.selectedCategory = categoryList[indexPath.row]
         }
     }
+    
+    func showCategorySearchBar() {
+        
+        categorySearchBar.searchBar.delegate = self
+        categorySearchBar.obscuresBackgroundDuringPresentation = false
+        categorySearchBar.searchBar.placeholder = "Search category by name"
+        navigationItem.searchController = categorySearchBar
+        definesPresentationContext = true
+        categorySearchBar.searchBar.searchTextField.textColor = .black
+    }
 
+}
+
+extension CategoryTVC: UISearchBarDelegate{
+        
+    // method to search the products as per the user input after click on search button on keyboard
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // add predicate
+        let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBar.text!)
+        fetchCategoryList(categoryPredicate: predicate)
+    }
+    
+    // method for cancle button click near search bar
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchCategoryList()
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
+    }
+    
+    // textDidChange method for search bar
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            fetchCategoryList()
+            
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
 }
