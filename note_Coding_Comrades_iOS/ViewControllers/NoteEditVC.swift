@@ -89,6 +89,9 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
                 } catch {
                     print(error)
                 }
+            } else {
+                scrubberSld.isHidden = true
+                playBtn.isHidden = true
             }
             
             takePictureBtn.isHidden = true
