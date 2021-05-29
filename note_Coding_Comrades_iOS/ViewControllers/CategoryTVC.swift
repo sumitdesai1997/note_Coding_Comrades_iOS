@@ -51,7 +51,12 @@ class CategoryTVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellCategory", for: indexPath)
                 
         cell.textLabel?.text = categoryList[indexPath.row].name
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 22)
+        
         cell.detailTextLabel?.text = String(categoryList[indexPath.row].notes!.count)
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 22)
+        cell.detailTextLabel?.textColor = .lightGray
+        
         return cell
     }
     

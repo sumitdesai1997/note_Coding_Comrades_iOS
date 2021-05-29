@@ -62,11 +62,16 @@ class NoteTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote", for: indexPath)
+       
         cell.textLabel?.text = noteList[indexPath.row].title
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 22)
+        
         let formatter1 = DateFormatter()
         formatter1.dateFormat  = "E, d MMM y HH:mm "
-        
         cell.detailTextLabel?.text = formatter1.string(from: noteList[indexPath.row].date!)
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 18)
+        cell.detailTextLabel?.textColor = .lightGray
+        
         return cell
     }
     
