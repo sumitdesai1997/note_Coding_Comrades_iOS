@@ -19,7 +19,7 @@ class NoteTVC: UITableViewController {
     
     var currentPredicate : NSPredicate? = nil
     var ascendingSort = true
-    var sortingType = "title"
+    var sortingType = "date"
     
     var selectMode = false
     
@@ -66,7 +66,7 @@ class NoteTVC: UITableViewController {
         let formatter1 = DateFormatter()
         formatter1.dateFormat  = "E, d MMM y HH:mm "
         
-            cell.detailTextLabel?.text = formatter1.string(from: noteList[indexPath.row].date!)
+        cell.detailTextLabel?.text = formatter1.string(from: noteList[indexPath.row].date!)
         return cell
     }
     
