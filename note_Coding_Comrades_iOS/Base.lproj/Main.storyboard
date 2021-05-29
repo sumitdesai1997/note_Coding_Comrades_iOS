@@ -65,7 +65,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Categories" id="DF5-l9-ySH">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="CWc-ob-qeR">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" image="square.and.pencil" catalog="system" id="CWc-ob-qeR">
                             <connections>
                                 <action selector="toggleEditable:" destination="wRb-zj-fGq" id="foO-wp-JYm"/>
                             </connections>
@@ -86,24 +86,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellNote" textLabel="RaC-WV-U4I" imageView="CM0-41-XS6" style="IBUITableViewCellStyleDefault" id="n7W-Lt-Jzg">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellNote" textLabel="RaC-WV-U4I" detailTextLabel="ysN-gd-p5j" imageView="CM0-41-XS6" style="IBUITableViewCellStyleSubtitle" id="n7W-Lt-Jzg">
+                                <rect key="frame" x="0.0" y="28" width="414" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n7W-Lt-Jzg" id="JAk-4g-0VN">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RaC-WV-U4I">
-                                            <rect key="frame" x="59" y="0.0" width="335" height="44"/>
+                                            <rect key="frame" x="59.75" y="9" width="33" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="note.text" catalog="system" id="CM0-41-XS6">
-                                            <rect key="frame" x="21.5" y="13" width="21" height="17.5"/>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CM0-41-XS6">
+                                            <rect key="frame" x="19.25" y="17" width="25.5" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <imageReference key="image" image="note.text" catalog="system" symbolScale="large"/>
                                         </imageView>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ysN-gd-p5j">
+                                            <rect key="frame" x="59.75" y="31.5" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -119,20 +127,12 @@
                     <toolbarItems>
                         <barButtonItem title="Change category" image="move.3d" catalog="system" id="oVi-4n-1Jp"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ch0-aW-S6Z"/>
-                        <barButtonItem title="Create Note" image="note.text.badge.plus" catalog="system" id="H24-Ae-u3h">
-                            <connections>
-                                <segue destination="X4X-3d-swQ" kind="show" id="BS6-og-00I"/>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Notes" id="scV-VS-v2d">
-                        <barButtonItem key="rightBarButtonItem" title="Sort" id="Qm7-EL-dFO">
-                            <connections>
-                                <action selector="menuClick:" destination="7Pl-t2-Bfy" id="Dl2-C2-lm4"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Notes" id="scV-VS-v2d"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="X4X-3d-swQ" kind="show" identifier="toCreateNote" id="tce-tb-Bgb"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zhv-EK-GqR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -387,7 +387,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BhO-bq-oHc"/>
+        <segue reference="tce-tb-Bgb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
@@ -395,8 +395,8 @@
         <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="move.3d" catalog="system" width="128" height="106"/>
         <image name="note.text" catalog="system" width="128" height="106"/>
-        <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

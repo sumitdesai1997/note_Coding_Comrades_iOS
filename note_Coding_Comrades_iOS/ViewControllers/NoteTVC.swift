@@ -21,6 +21,8 @@ class NoteTVC: UITableViewController {
     var ascendingSort = true
     var sortingType = "title"
     
+    var selectMode = false
+    
     var selectedCategory : Category? = nil {
         didSet{
             navigationItem.title = selectedCategory?.name
@@ -28,10 +30,12 @@ class NoteTVC: UITableViewController {
         }
     }
     
+    
+    
     var selectedNote : Note? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        menuSet()
         showSearchBar()
         // longpress gesture on tableview
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
@@ -59,7 +63,10 @@ class NoteTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellNote", for: indexPath)
         cell.textLabel?.text = noteList[indexPath.row].title
+        let formatter1 = DateFormatter()
+        formatter1.dateFormat  = "E, d MMM y HH:mm "
         
+        cell.detailTextLabel?.text = formatter1.string(from: noteList[indexPath.row].date!)
         return cell
     }
     
@@ -70,8 +77,6 @@ class NoteTVC: UITableViewController {
             saveNotes()
             noteList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
@@ -192,25 +197,31 @@ class NoteTVC: UITableViewController {
            }
        }
     }
-    
-    // sort functionality as per the user choice between title or date
-    @IBAction func menuClick(_ sender: UIBarButtonItem) {
-        let title = UIAction(title: " Sort by title"){ _ in
-            print("title tapped")
-            self.noteList = self.noteList.sorted(by: { (note1: Note, note2: Note) -> Bool in
-                return note1.title! < note2.title!
-            })
-            self.tableView.reloadData()
+    func menuSet(){
+        let title = UIAction(title: "Sort by title" , image: UIImage(systemName: "textformat.abc")){ element in
+            self.sortingType = "title"
+            
+            self.fetchNotes(predicate: self.currentPredicate)
         }
-        let date = UIAction(title: " Sort by date"){ _ in
-            self.noteList = self.noteList.sorted(by: { (note1: Note, note2: Note) -> Bool in
-                return note1.date! > note2.date!
-            })
-            self.tableView.reloadData()
+        let date = UIAction(title: "Sort by date" , image: UIImage(systemName: "calendar")){ element in
+            self.sortingType = "date"
+            self.fetchNotes(predicate: self.currentPredicate)
         }
-        let menu = UIMenu(title: "Sort", children: [title, date])
-        sender.menu = menu
+        let menuSort = UIMenu(title: "Sort" , image: UIImage(systemName: "list.bullet")  ,children: [title, date] )
+        
+        let select = UIAction(title: "Select Notes" , image: UIImage(systemName: "square.and.pencil") ){ _ in
+            self.selectMode = !self.selectMode
+            self.tableView.setEditing(self.selectMode, animated: true)
+        }
+        let create = UIAction(title: "Create note", image: UIImage(systemName: "note.text.badge.plus")){ _ in
+            self.performSegue(withIdentifier: "toCreateNote", sender: self)
+        }
+        
+        let menuEdit = UIMenu( title: "Edit Options", children: [create, select , menuSort])
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menuEdit)
     }
+
     
     // shake motion
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
