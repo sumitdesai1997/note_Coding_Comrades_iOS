@@ -24,6 +24,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     @IBOutlet weak var recordWidth: NSLayoutConstraint!
     @IBOutlet weak var playHeight: NSLayoutConstraint!
     @IBOutlet weak var scrubberWidth: NSLayoutConstraint!
+    @IBOutlet weak var changePictureHeight: NSLayoutConstraint!
+    @IBOutlet weak var changePictureBtn: UIButton!
     
     var delegate : NoteTVC?
     var selectedNote : Note?
@@ -72,6 +74,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
 //            view.layoutIfNeeded()
             
             viewVisibility(constraint: notePictureHeight, button: notePictureImg, hide: true, constant: 0)
+            viewVisibility(constraint: changePictureHeight, button: changePictureBtn, hide: true, constant: 0)
             viewVisibility(constraint: playHeight, button: playBtn, hide: true, constant: 0)
             viewVisibility(constraint: scrubberWidth, button: scrubberSld, hide: true, constant: 0)
         } else {
@@ -81,8 +84,12 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             detailsTF.text = selectedNote?.details
             if let image = selectedNote?.image{
                 notePictureImg.image = UIImage(data: image)
+                
+                viewVisibility(constraint: takePictureHeight, button: takePictureBtn, hide: true, constant: 0)
+                viewVisibility(constraint: uploadPictureHeight, button: uploadPictureBtn, hide: true, constant: 0)
             } else {
                 viewVisibility(constraint: notePictureHeight, button: notePictureImg, hide: true, constant: 0)
+                viewVisibility(constraint: changePictureHeight, button: changePictureBtn, hide: true, constant: 0)
             }
             
             if let coordinateX = selectedNote?.coordinateX, let coordinateY = selectedNote?.coordinateY{
@@ -103,10 +110,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
                 viewVisibility(constraint: playHeight, button: playBtn, hide: true, constant: 0)
                 viewVisibility(constraint: scrubberWidth, button: scrubberSld, hide: true, constant: 0)
             }
-            
-            viewVisibility(constraint: takePictureHeight, button: takePictureBtn, hide: true, constant: 0)
-            viewVisibility(constraint: uploadPictureHeight, button: uploadPictureBtn, hide: true, constant: 0)
-            viewVisibility(constraint: recordWidth, button: recordBtn, hide: true, constant: 0)
         }
         
     	
@@ -195,6 +198,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         }
         
         viewVisibility(constraint: notePictureHeight, button: notePictureImg, hide: false, constant: 128)
+        viewVisibility(constraint: changePictureHeight, button: changePictureBtn, hide: false, constant: 34)
         
         notePictureImg.image = image
         
