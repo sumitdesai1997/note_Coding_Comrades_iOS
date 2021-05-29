@@ -136,15 +136,13 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         
         if (audioURL != nil){
             selectedNote?.audio = try? Data(contentsOf: audioURL!)
-            print("audioURL: \(audioURL)")
-            print("audio: \(selectedNote?.audio)")
         }
         
         delegate!.saveNotes()
    }
     
     @IBAction func checkTitleExist(_ sender: Any) {
-        var notesTitles = delegate?.noteList.map({$0.title!.lowercased()})
+        let notesTitles = delegate?.noteList.map({$0.title!.lowercased()})
         if (notesTitles!.contains(titleTF.text!.lowercased())){
             titleTF.text = ""
             let alert = UIAlertController(title: "Title Taken", message: "Please choose another title", preferredStyle: .alert)
@@ -314,7 +312,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             if error != nil { // if there was an error
                 print("error reverseGeocodeLocation" , error!) // print the error
             } else {
-                if let placemark = placemarks?[0] {
+                if let _ = placemarks?[0] {
                     self.mapKit.removeAnnotations(self.mapKit.annotations)
                     let latDelta: CLLocationDegrees = 0.2 // latitude delta
                     let lngDelta: CLLocationDegrees = 0.2 // longitude delta
