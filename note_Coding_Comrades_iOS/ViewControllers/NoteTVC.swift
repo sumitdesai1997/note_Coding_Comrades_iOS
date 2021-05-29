@@ -66,7 +66,7 @@ class NoteTVC: UITableViewController {
         let formatter1 = DateFormatter()
         formatter1.dateFormat  = "E, d MMM y HH:mm "
         
-        cell.detailTextLabel?.text = formatter1.string(from: noteList[indexPath.row].date!)
+            cell.detailTextLabel?.text = formatter1.string(from: noteList[indexPath.row].date!)
         return cell
     }
     
@@ -173,6 +173,7 @@ class NoteTVC: UITableViewController {
     func saveNotes() {
         do {
             try context.save()
+            tableView.reloadData()
         } catch {
             print("Error saving the notes \(error.localizedDescription)")
         }
