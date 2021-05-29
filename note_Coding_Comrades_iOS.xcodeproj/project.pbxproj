@@ -19,6 +19,7 @@
 		03FBC49926578CDA00B02EE1 /* note_Coding_Comrades_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC49826578CDA00B02EE1 /* note_Coding_Comrades_iOSUITests.swift */; };
 		03FBC4B22657A1C000B02EE1 /* CategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC4B12657A1C000B02EE1 /* CategoryTVC.swift */; };
 		03FBC4BA2657A4F400B02EE1 /* NoteTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBC4B92657A4F400B02EE1 /* NoteTVC.swift */; };
+		494D964C2661F3C5000FE688 /* ChangeNoteCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494D964B2661F3C5000FE688 /* ChangeNoteCategoryVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		03FBC49A26578CDA00B02EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03FBC4B12657A1C000B02EE1 /* CategoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTVC.swift; sourceTree = "<group>"; };
 		03FBC4B92657A4F400B02EE1 /* NoteTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTVC.swift; sourceTree = "<group>"; };
+		494D964B2661F3C5000FE688 /* ChangeNoteCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNoteCategoryVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				03FBC4B12657A1C000B02EE1 /* CategoryTVC.swift */,
 				03FBC4B92657A4F400B02EE1 /* NoteTVC.swift */,
 				0355193A265F84420053613E /* NoteEditVC.swift */,
+				494D964B2661F3C5000FE688 /* ChangeNoteCategoryVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494D964C2661F3C5000FE688 /* ChangeNoteCategoryVC.swift in Sources */,
 				03FBC47826578CCB00B02EE1 /* ViewController.swift in Sources */,
 				03FBC4B22657A1C000B02EE1 /* CategoryTVC.swift in Sources */,
 				03FBC4BA2657A4F400B02EE1 /* NoteTVC.swift in Sources */,

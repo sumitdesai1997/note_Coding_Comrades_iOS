@@ -29,9 +29,9 @@ class NoteTVC: UITableViewController {
             fetchNotes()
         }
     }
+    @IBOutlet weak var changeCategoryBtn: UIBarButtonItem!
     
-    
-    
+    @IBOutlet weak var deleteNotesBtn: UIBarButtonItem!
     var selectedNote : Note? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,15 +188,32 @@ class NoteTVC: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nevc = segue.destination as! NoteEditVC
-        nevc.delegate = self
-        
-        if let cell = sender as? UITableViewCell {
-           if let index = tableView.indexPath(for: cell)?.row {
-               nevc.selectedNote = noteList[index]
+        if let nevc = segue.destination as? NoteEditVC {
+            nevc.delegate = self
+            
+            if let cell = sender as? UITableViewCell {
+               if let index = tableView.indexPath(for: cell)?.row {
+                   nevc.selectedNote = noteList[index]
+               }
            }
-       }
+        }
+        
+        if let destination = segue.destination as? ChangeNoteCategoryVC {
+            if let index = tableView.indexPathsForSelectedRows {
+                let rows = index.map {$0.row}
+                destination.selectedNotes = rows.map {noteList[$0]}
+            }
+        }
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard identifier != "changeNotesCategory" else {
+            return true
+        }
+        return selectMode ? false : true
+    }
+    
+    
     func menuSet(){
         let title = UIAction(title: "Sort by title" , image: UIImage(systemName: "textformat.abc")){ element in
             self.sortingType = "title"
@@ -209,9 +226,16 @@ class NoteTVC: UITableViewController {
         }
         let menuSort = UIMenu(title: "Sort" , image: UIImage(systemName: "list.bullet")  ,children: [title, date] )
         
-        let select = UIAction(title: "Select Notes" , image: UIImage(systemName: "square.and.pencil") ){ _ in
+        let select = UIAction(title: "Toggle Selection" , image: UIImage(systemName: "square.and.pencil") ){ _ in
+            
+            
+            self.changeCategoryBtn.isEnabled = !self.changeCategoryBtn.isEnabled
+            self.deleteNotesBtn.isEnabled = !self.deleteNotesBtn.isEnabled
             self.selectMode = !self.selectMode
+            
             self.tableView.setEditing(self.selectMode, animated: true)
+            
+            
         }
         let create = UIAction(title: "Create note", image: UIImage(systemName: "note.text.badge.plus")){ _ in
             self.performSegue(withIdentifier: "toCreateNote", sender: self)
@@ -222,11 +246,37 @@ class NoteTVC: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menuEdit)
     }
 
+    //MARK: - Action methods
+    
+    @IBAction func changeCategoryClick(_ sender: Any) {
+        
+    }
+    /// trash bar button functionality
+    /// - Parameter sender: bar button
+    @IBAction func deleteNotes(_ sender: Any) {
+        if let indexPaths = tableView.indexPathsForSelectedRows {
+            let rows = (indexPaths.map {$0.row}).sorted(by: >)
+            
+            let _ = rows.map {deleteNote(note: noteList[$0])}
+            let _ = rows.map {noteList.remove(at: $0)}
+            
+            tableView.reloadData()
+            saveNotes()
+        }
+    }
+    
     
     // shake motion
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         ascendingSort = !ascendingSort
         fetchNotes(predicate: currentPredicate)
+    }
+    
+    // dismiss modal for changing category
+    @IBAction func unwindToNoteTVC(_ unwindSegue: UIStoryboardSegue) {
+        saveNotes()
+        fetchNotes()
+        tableView.setEditing(false, animated: true)
     }
 
 }
