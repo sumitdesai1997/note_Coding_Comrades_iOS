@@ -33,6 +33,10 @@ class NoteTVC: UITableViewController {
         super.viewDidLoad()
         
         showSearchBar()
+        // longpress gesture on tableview
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
+        longPressGesture.minimumPressDuration = 0.5
+        self.tableView.addGestureRecognizer(longPressGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +77,48 @@ class NoteTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedNote = noteList[indexPath.row]
+    }
+    
+    @objc func handleLongPressCell(longPressGesture: UILongPressGestureRecognizer) {
+        let p = longPressGesture.location(in: self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: p)
+        if indexPath == nil {
+            print("Long press on table view, not row.")
+        } else if longPressGesture.state == UIGestureRecognizer.State.began {
+            print("Long press on row, at \(indexPath!.row)")
+            
+            var textField = UITextField()
+            
+            let alert = UIAlertController(title: "Quick title edit", message: "Please set a title for the note", preferredStyle: .alert)
+            let addAction = UIAlertAction(title: "Accept", style: .default) { (action) in
+                let notesTitles = self.noteList.filter({$0.title?.lowercased() != self.noteList[indexPath!.row].title!.lowercased()}).map({$0.title?.lowercased()})
+                guard textField.text != "" else {return self.showAlert(title: "Empty field", message: "Not able to edit the category")}
+                guard !notesTitles.contains(textField.text?.lowercased()) else {return self.showAlert(title: "Title Taken", message: "Please choose another title")}
+                self.noteList[indexPath!.row].title = textField.text!
+                self.saveNotes()
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            // change the color of the cancel button action
+            cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+            
+            alert.addAction(addAction)
+            alert.addAction(cancelAction)
+            alert.addTextField { (field) in
+                textField = field
+                textField.placeholder = "Note Title"
+                textField.text = self.noteList[indexPath!.row].title
+            }
+            
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    // show alert when the title of the note is taken
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
     
     // fetching the notes from the core data

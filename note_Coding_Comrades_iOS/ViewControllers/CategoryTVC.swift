@@ -29,6 +29,10 @@ class CategoryTVC: UITableViewController {
         super.viewDidLoad()
         showCategorySearchBar()
         fetchCategoryList()
+        // longpress gesture on tableview
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressCell))
+        longPressGesture.minimumPressDuration = 0.5
+        self.tableView.addGestureRecognizer(longPressGesture)
     }
     // MARK: - Table view data source
 
@@ -65,12 +69,48 @@ class CategoryTVC: UITableViewController {
         }
     }
     
+    @objc func handleLongPressCell(longPressGesture: UILongPressGestureRecognizer) {
+        let p = longPressGesture.location(in: self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: p)
+        if indexPath == nil {
+            print("Long press on table view, not row.")
+        } else if longPressGesture.state == UIGestureRecognizer.State.began {
+            print("Long press on row, at \(indexPath!.row)")
+            
+            var textField = UITextField()
+            
+            let alert = UIAlertController(title: "Rename category", message: "please set a name", preferredStyle: .alert)
+            let addAction = UIAlertAction(title: "Accept", style: .default) { (action) in
+                let categoryNames = self.categoryList.map({$0.name?.lowercased()}).filter({$0 != self.categoryList[indexPath!.row].name!.lowercased()})
+                guard textField.text != "" else {return self.showAlert(title: "Empty field", message: "Not able to edit the category name")}
+                guard !categoryNames.contains(textField.text?.lowercased()) else {return self.showAlert(title: "Name Taken", message: "Please choose another name")}
+                
+                self.categoryList[indexPath!.row].name = textField.text!
+                self.saveCategory()
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            // change the color of the cancel button action
+            cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+            
+            alert.addAction(addAction)
+            alert.addAction(cancelAction)
+            alert.addTextField { (field) in
+                textField = field
+                textField.placeholder = "Category name"
+                textField.text = self.categoryList[indexPath!.row].name
+            }
+            
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func createCategory(_ sender: Any) {
         var textField = UITextField()
-        let alert = UIAlertController(title: "Create new category", message: "please give a name", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Create new category", message: "Please give a name", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { (action) in
             let categoryNames = self.categoryList.map {$0.name?.lowercased()}
-            guard !categoryNames.contains(textField.text?.lowercased()) else {return self.showAlert()}
+            guard textField.text != "" else {return self.showAlert(title: "Empty field", message: "Not able to create the category")}
+            guard !categoryNames.contains(textField.text?.lowercased()) else {return self.showAlert(title: "Name Taken", message: "Please choose another name")}
             
             let newCategory = Category(context: self.context)
             newCategory.name = textField.text!
@@ -91,9 +131,9 @@ class CategoryTVC: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    /// show alert when the name of the folder is taken
-    func showAlert() {
-        let alert = UIAlertController(title: "Name Taken", message: "Please choose another name", preferredStyle: .alert)
+    // show alert when the name of the category is taken
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)

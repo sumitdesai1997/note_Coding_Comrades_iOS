@@ -41,7 +41,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         mapKit.showsUserLocation = false // show user location
         mapKit.isZoomEnabled = false// disable zoom
@@ -87,7 +86,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             }
             
             if let coordinateX = selectedNote?.coordinateX, let coordinateY = selectedNote?.coordinateY{
-            getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateX), longitude: CLLocationDegrees(coordinateY)))
+                getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateX), longitude: CLLocationDegrees(coordinateY)))
             }
             
             if let audio = selectedNote?.audio{
@@ -115,14 +114,22 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
 
     override func viewWillDisappear(_ animated: Bool) {
         guard titleTF.text != "" && detailsTF.text != "" else {return}
+        var notesTitles = delegate?.noteList.map({$0.title!.lowercased()})
+
+
         if (selectedNote == nil){
             selectedNote =  Note(context: delegate!.context)
             selectedNote?.parentCategory = delegate?.selectedCategory
+            selectedNote?.coordinateX = userLocation.coordinate.latitude
+            selectedNote?.coordinateY = userLocation.coordinate.longitude
+        }else{
+            notesTitles = notesTitles!.filter({$0 != selectedNote?.title!.lowercased()})
         }
+        
+        guard !notesTitles!.contains(titleTF.text!.lowercased()) else {return}
+        
         selectedNote?.title = titleTF.text
         selectedNote?.details = detailsTF.text
-        selectedNote?.coordinateX = userLocation.coordinate.latitude
-        selectedNote?.coordinateY = userLocation.coordinate.longitude
         selectedNote?.date = Date()
         
         if(notePictureImg.image != nil){
@@ -325,12 +332,15 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
 extension NoteEditVC : CLLocationManagerDelegate{
     // gets the current location and creates the annotation for it, as well as centers the map into the region closer to the location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations[0] // gets the location of the user
-        
-        let latitude = userLocation.coordinate.latitude // user latitude
-        let longitude = userLocation.coordinate.longitude // user longitude
-        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) // sets the current location into the global variable
-        getLocation(coordinate: coordinate)
+        if(selectedNote == nil){
+            userLocation = locations[0] // gets the location of the user
+            
+            let latitude = userLocation.coordinate.latitude // user latitude
+            let longitude = userLocation.coordinate.longitude // user longitude
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) // sets the current location into the global variable
+            getLocation(coordinate: coordinate)
+
+        }
 
     }
 }
