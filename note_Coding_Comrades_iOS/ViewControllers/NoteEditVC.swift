@@ -114,19 +114,13 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
 
     override func viewWillDisappear(_ animated: Bool) {
         guard titleTF.text != "" && detailsTF.text != "" else {return}
-        var notesTitles = delegate?.noteList.map({$0.title!.lowercased()})
-
-
+        
         if (selectedNote == nil){
             selectedNote =  Note(context: delegate!.context)
             selectedNote?.parentCategory = delegate?.selectedCategory
             selectedNote?.coordinateX = userLocation.coordinate.latitude
             selectedNote?.coordinateY = userLocation.coordinate.longitude
-        }else{
-            notesTitles = notesTitles!.filter({$0 != selectedNote?.title!.lowercased()})
         }
-        
-        guard !notesTitles!.contains(titleTF.text!.lowercased()) else {return}
         
         selectedNote?.title = titleTF.text
         selectedNote?.details = detailsTF.text
@@ -146,6 +140,17 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         delegate!.saveNotes()
    }
     
+    @IBAction func checkTitleExist(_ sender: Any) {
+        var notesTitles = delegate?.noteList.map({$0.title!.lowercased()})
+        if (notesTitles!.contains(titleTF.text!.lowercased())){
+            titleTF.text = ""
+            let alert = UIAlertController(title: "Title Taken", message: "Please choose another title", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+    }
+        
     func viewVisibility(constraint: NSLayoutConstraint, button: UIView, hide: Bool, constant: Double){
         
         constraint.constant = CGFloat(constant)
