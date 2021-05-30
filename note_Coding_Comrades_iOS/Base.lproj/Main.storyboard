@@ -284,7 +284,7 @@
                                                 <rect key="frame" x="57" y="319" width="130" height="34"/>
                                                 <color key="backgroundColor" systemColor="linkColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="130" id="mwl-d5-MlJ"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="mwl-d5-MlJ"/>
                                                     <constraint firstAttribute="height" constant="34" id="r7c-bc-zrG"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
@@ -297,7 +297,7 @@
                                                 <color key="backgroundColor" systemColor="linkColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="OUp-GD-yz2"/>
-                                                    <constraint firstAttribute="width" constant="130" id="xK4-SC-K7x"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="xK4-SC-K7x"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                                 <state key="normal" title="Upload Picture">
@@ -374,7 +374,7 @@
                                                 <rect key="frame" x="132" y="518" width="150" height="34"/>
                                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="628-4B-hUF"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="628-4B-hUF"/>
                                                     <constraint firstAttribute="height" constant="34" id="zJx-fU-u26"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
@@ -390,8 +390,10 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="WOT-hk-gYt" secondAttribute="trailing" constant="20" id="12H-60-NGc"/>
                                             <constraint firstAttribute="trailing" secondItem="KRx-nL-clj" secondAttribute="trailing" constant="20" id="1ny-ep-RyJ"/>
-                                            <constraint firstItem="n8e-Zb-DYn" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="20" id="65M-2A-Qrx"/>
+                                            <constraint firstAttribute="trailing" secondItem="fcw-r8-6CX" secondAttribute="trailing" constant="266.5" id="2gi-lK-6pr"/>
+                                            <constraint firstItem="n8e-Zb-DYn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b75-6j-Ou2" secondAttribute="leading" symbolic="YES" id="65M-2A-Qrx"/>
                                             <constraint firstItem="5Hm-9U-1XH" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="57" id="6Mi-o6-nsH"/>
+                                            <constraint firstAttribute="trailing" secondItem="Dah-S3-BtX" secondAttribute="trailing" constant="272" id="85u-dM-ph8"/>
                                             <constraint firstItem="eMa-4L-EeG" firstAttribute="top" secondItem="Tns-cg-sFU" secondAttribute="bottom" constant="15" id="93a-Fo-Am9"/>
                                             <constraint firstItem="KRx-nL-clj" firstAttribute="top" secondItem="n8e-Zb-DYn" secondAttribute="bottom" constant="15" id="9g1-M7-6eM"/>
                                             <constraint firstItem="iq5-ju-hH1" firstAttribute="top" secondItem="fcw-r8-6CX" secondAttribute="bottom" constant="15" id="Avd-oi-M44"/>
@@ -402,11 +404,13 @@
                                             <constraint firstItem="550-WD-mUG" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="20" id="HgO-BQ-odh"/>
                                             <constraint firstItem="Tns-cg-sFU" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="67" id="JIH-Z7-jcQ"/>
                                             <constraint firstAttribute="trailing" secondItem="iq5-ju-hH1" secondAttribute="trailing" constant="57" id="KsV-eC-zPL"/>
+                                            <constraint firstAttribute="trailing" secondItem="n8e-Zb-DYn" secondAttribute="trailing" constant="361.5" id="Lo9-Dh-pe5"/>
                                             <constraint firstItem="uEv-cY-HFj" firstAttribute="top" secondItem="KRx-nL-clj" secondAttribute="bottom" constant="30" id="Lrk-f0-dyV"/>
                                             <constraint firstAttribute="bottom" secondItem="ehB-BM-aM4" secondAttribute="bottom" constant="30" id="Mn9-nb-00J"/>
                                             <constraint firstAttribute="trailing" secondItem="eMa-4L-EeG" secondAttribute="trailing" constant="132" id="PJk-If-zL3"/>
-                                            <constraint firstItem="eMa-4L-EeG" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="132" id="ROs-0f-88c"/>
-                                            <constraint firstItem="Dah-S3-BtX" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="20" id="SZw-Aw-v0F"/>
+                                            <constraint firstItem="eMa-4L-EeG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b75-6j-Ou2" secondAttribute="leading" symbolic="YES" id="ROs-0f-88c"/>
+                                            <constraint firstItem="Dah-S3-BtX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b75-6j-Ou2" secondAttribute="leading" symbolic="YES" id="SZw-Aw-v0F"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="550-WD-mUG" secondAttribute="trailing" constant="20" symbolic="YES" id="T6C-uo-FNd"/>
                                             <constraint firstAttribute="trailing" secondItem="ehB-BM-aM4" secondAttribute="trailing" constant="20" id="WZy-Do-gW0"/>
                                             <constraint firstItem="WOT-hk-gYt" firstAttribute="top" secondItem="uEv-cY-HFj" secondAttribute="bottom" constant="15" id="Waa-Ny-g1f"/>
                                             <constraint firstItem="KRx-nL-clj" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="20" id="Z17-gD-y5u"/>
@@ -416,13 +420,14 @@
                                             <constraint firstItem="n8e-Zb-DYn" firstAttribute="top" secondItem="b75-6j-Ou2" secondAttribute="top" constant="1" id="bx5-Vu-N5f"/>
                                             <constraint firstItem="ehB-BM-aM4" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="20" id="cIS-tK-B9u"/>
                                             <constraint firstItem="9DS-HT-mCJ" firstAttribute="top" secondItem="Dah-S3-BtX" secondAttribute="bottom" constant="15" id="dc3-90-TDk"/>
+                                            <constraint firstAttribute="trailing" secondItem="uEv-cY-HFj" secondAttribute="trailing" constant="334.5" id="fA7-Jf-6dx"/>
                                             <constraint firstItem="Vrd-Dk-K8m" firstAttribute="top" secondItem="Dah-S3-BtX" secondAttribute="bottom" constant="15" id="gRY-p1-UVP"/>
                                             <constraint firstItem="Tgb-4m-Hr9" firstAttribute="top" secondItem="Dah-S3-BtX" secondAttribute="bottom" constant="15" id="gXB-Q6-n3O"/>
                                             <constraint firstItem="5Hm-9U-1XH" firstAttribute="top" secondItem="fcw-r8-6CX" secondAttribute="bottom" constant="15" id="hst-NI-hhb"/>
-                                            <constraint firstItem="uEv-cY-HFj" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="20" id="jVh-dx-0bH"/>
+                                            <constraint firstItem="uEv-cY-HFj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b75-6j-Ou2" secondAttribute="leading" symbolic="YES" id="jVh-dx-0bH"/>
                                             <constraint firstItem="ehB-BM-aM4" firstAttribute="top" secondItem="550-WD-mUG" secondAttribute="bottom" constant="15" id="kJd-fb-Jt2"/>
-                                            <constraint firstItem="iq5-ju-hH1" firstAttribute="leading" secondItem="5Hm-9U-1XH" secondAttribute="trailing" constant="40" id="qfy-QS-UUo"/>
-                                            <constraint firstItem="fcw-r8-6CX" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="20" id="r4Y-FZ-EUi"/>
+                                            <constraint firstItem="iq5-ju-hH1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5Hm-9U-1XH" secondAttribute="trailing" constant="8" symbolic="YES" id="qfy-QS-UUo"/>
+                                            <constraint firstItem="fcw-r8-6CX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b75-6j-Ou2" secondAttribute="leading" symbolic="YES" id="r4Y-FZ-EUi"/>
                                             <constraint firstItem="Tgb-4m-Hr9" firstAttribute="leading" secondItem="9DS-HT-mCJ" secondAttribute="trailing" constant="20" id="s8j-HG-CKv"/>
                                         </constraints>
                                     </view>
@@ -478,7 +483,14 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Yyq-yW-4bC">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                        </textAttributes>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="eBb-fF-ctI">
                         <rect key="frame" x="0.0" y="813" width="414" height="49"/>
