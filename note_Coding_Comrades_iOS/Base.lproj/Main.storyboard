@@ -46,7 +46,7 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="1" green="0.92847842032405414" blue="0.16417346738130745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.98217540722781604" green="1" blue="0.68864876262661157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="7Pl-t2-Bfy" kind="show" identifier="toNoteTVC" id="QYn-DF-I6s"/>
@@ -255,8 +255,8 @@
                                     <navigationItem title="Title" id="HM1-72-d0S"/>
                                 </items>
                             </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBP-kB-gPB">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBP-kB-gPB">
+                                <rect key="frame" x="1" y="140" width="412" height="673"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b75-6j-Ou2">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="894"/>
@@ -285,10 +285,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Provide content for your note" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WOT-hk-gYt">
-                                                <rect key="frame" x="20" y="120" width="374" height="110"/>
+                                                <rect key="frame" x="25" y="120" width="364" height="110"/>
                                                 <color key="backgroundColor" systemColor="tertiarySystemFillColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="374" id="sIw-cT-wP5"/>
+                                                    <constraint firstAttribute="width" constant="364" id="h2V-Wn-l7x"/>
                                                     <constraint firstAttribute="height" constant="110" id="sJD-1j-FGq"/>
                                                 </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -409,9 +409,10 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="WOT-hk-gYt" secondAttribute="trailing" constant="20" id="12H-60-NGc"/>
                                             <constraint firstAttribute="trailing" secondItem="KRx-nL-clj" secondAttribute="trailing" constant="20" id="1ny-ep-RyJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="WOT-hk-gYt" secondAttribute="trailing" constant="25" id="3zE-aW-m2O"/>
                                             <constraint firstItem="5Hm-9U-1XH" firstAttribute="top" secondItem="fcw-r8-6CX" secondAttribute="bottom" constant="10" id="5Hg-VS-2R2"/>
+                                            <constraint firstItem="WOT-hk-gYt" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="25" id="5gz-Vr-OLR"/>
                                             <constraint firstItem="n8e-Zb-DYn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="20" symbolic="YES" id="65M-2A-Qrx"/>
                                             <constraint firstItem="5Hm-9U-1XH" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="57" id="6Mi-o6-nsH"/>
                                             <constraint firstItem="eMa-4L-EeG" firstAttribute="top" secondItem="Tns-cg-sFU" secondAttribute="bottom" constant="5" id="93a-Fo-Am9"/>
@@ -422,7 +423,6 @@
                                             <constraint firstItem="Tns-cg-sFU" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="67" id="Fct-rx-12c"/>
                                             <constraint firstItem="Vrd-Dk-K8m" firstAttribute="top" secondItem="Dah-S3-BtX" secondAttribute="bottom" constant="10" id="FgT-g2-eFP"/>
                                             <constraint firstItem="WOT-hk-gYt" firstAttribute="top" secondItem="uEv-cY-HFj" secondAttribute="bottom" constant="10" id="GCS-y4-M1b"/>
-                                            <constraint firstItem="WOT-hk-gYt" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="20" id="H1K-dh-xD8"/>
                                             <constraint firstItem="550-WD-mUG" firstAttribute="leading" secondItem="b75-6j-Ou2" secondAttribute="leading" constant="24" id="HgO-BQ-odh"/>
                                             <constraint firstAttribute="trailing" secondItem="iq5-ju-hH1" secondAttribute="trailing" constant="57" id="KsV-eC-zPL"/>
                                             <constraint firstAttribute="trailing" secondItem="n8e-Zb-DYn" secondAttribute="trailing" constant="361.5" id="Lo9-Dh-pe5"/>
@@ -453,8 +453,9 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                                 <constraints>
-                                    <constraint firstItem="b75-6j-Ou2" firstAttribute="width" secondItem="QBP-kB-gPB" secondAttribute="width" id="8Wk-ID-g35"/>
+                                    <constraint firstItem="b75-6j-Ou2" firstAttribute="width" relation="greaterThanOrEqual" secondItem="QBP-kB-gPB" secondAttribute="width" id="8Wk-ID-g35"/>
                                     <constraint firstAttribute="bottom" secondItem="b75-6j-Ou2" secondAttribute="bottom" id="koH-DK-XVz"/>
                                     <constraint firstItem="b75-6j-Ou2" firstAttribute="leading" secondItem="QBP-kB-gPB" secondAttribute="leading" id="pg0-jd-En1"/>
                                     <constraint firstItem="b75-6j-Ou2" firstAttribute="top" secondItem="QBP-kB-gPB" secondAttribute="top" id="ufF-tD-SaS"/>
@@ -465,8 +466,8 @@
                         <viewLayoutGuide key="safeArea" id="d0r-qe-CL2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="QBP-kB-gPB" firstAttribute="trailing" secondItem="d0r-qe-CL2" secondAttribute="trailing" id="3Sl-Q7-Ebj"/>
-                            <constraint firstItem="QBP-kB-gPB" firstAttribute="leading" secondItem="d0r-qe-CL2" secondAttribute="leading" id="Fll-ph-NoL"/>
+                            <constraint firstItem="QBP-kB-gPB" firstAttribute="trailing" secondItem="d0r-qe-CL2" secondAttribute="trailing" constant="-1" id="3Sl-Q7-Ebj"/>
+                            <constraint firstItem="QBP-kB-gPB" firstAttribute="leading" secondItem="d0r-qe-CL2" secondAttribute="leading" constant="1" id="Fll-ph-NoL"/>
                             <constraint firstItem="QBP-kB-gPB" firstAttribute="bottom" secondItem="d0r-qe-CL2" secondAttribute="bottom" id="cy1-da-TKW"/>
                             <constraint firstItem="QBP-kB-gPB" firstAttribute="top" secondItem="d0r-qe-CL2" secondAttribute="top" id="elK-GX-aFD"/>
                         </constraints>
