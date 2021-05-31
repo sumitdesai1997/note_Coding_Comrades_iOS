@@ -128,18 +128,19 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
 
     override func viewWillDisappear(_ animated: Bool) {
         if shallSave {
-            guard titleTF.text != "" && detailsTF.text != "" else {return}
+            
             
             if (selectedNote == nil){
                 selectedNote =  Note(context: delegate!.context)
                 selectedNote?.parentCategory = delegate?.selectedCategory
                 selectedNote?.coordinateX = userLocation.coordinate.latitude
                 selectedNote?.coordinateY = userLocation.coordinate.longitude
+                selectedNote?.date = Date()
             }
             
             selectedNote?.title = titleTF.text
             selectedNote?.details = detailsTF.text
-            selectedNote?.date = Date()
+            
             
             if(notePictureImg.image != nil){
                 selectedNote?.image = notePictureImg.image!.pngData()!
@@ -154,23 +155,41 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         }
 
    }
+    
+    // validates before dismissing the view controller
     @objc func shallDisappear() {
         shallSave = true
-        let notesTitles = delegate?.noteList.map({$0.title!.lowercased()})
-        if (notesTitles!.contains(titleTF.text!.lowercased())){
-            titleTF.text = ""
-            let alert = UIAlertController(title: "Title Taken", message: "Please choose another title", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(okAction)
-            present(alert, animated: true, completion: nil)
-            
-        }else{
-            navigationController?.popViewController(animated: true)
+        
+        if titleTF.text == "" {
+            showAlert(title: "Title empty", message: "Please set a title")
+
+        }else if detailsTF.text == "" {
+            showAlert(title: "Description empty", message: "Please set a description")
+        }else {
+        
+            var notesTitles = delegate?.noteList.map({$0.title!.lowercased()})
+            if selectedNote != nil {
+                notesTitles = notesTitles!.filter({$0 != self.selectedNote?.title!.lowercased()})
+            }
+            if (notesTitles!.contains(titleTF.text!.lowercased())){
+                showAlert(title: "Title Taken", message: "Please choose another title")
+
+            }else{
+                navigationController?.popViewController(animated: true)
+            }
         }
     }
     @objc func dismissWithoutSaving() {
         shallSave = false
         navigationController?.popViewController(animated: true)
+    }
+    
+    func showAlert(title:String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+        titleTF.text =  selectedNote != nil ?  selectedNote?.title : ""
     }
 
         

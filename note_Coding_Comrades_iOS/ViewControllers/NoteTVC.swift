@@ -214,7 +214,13 @@ class NoteTVC: UITableViewController {
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard identifier != "changeNotesCategory" else {
-            return true
+            if (tableView.indexPathsForSelectedRows != nil){
+                return true
+            }else{
+                showAlert(title: "Error", message: "No notes were selected")
+                return false
+            }
+            
         }
         return selectMode ? false : true
     }
@@ -247,7 +253,7 @@ class NoteTVC: UITableViewController {
             self.performSegue(withIdentifier: "toCreateNote", sender: self)
         }
         
-        let menuEdit = UIMenu( title: "Edit Options", children: [create, select , menuSort])
+        let menuEdit = UIMenu( title: "Options", children: [create, select , menuSort])
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menuEdit)
     }
@@ -268,6 +274,13 @@ class NoteTVC: UITableViewController {
             
             tableView.reloadData()
             saveNotes()
+            changeCategoryBtn.isEnabled = false
+            deleteNotesBtn.isEnabled = false
+            selectMode = false
+            
+            tableView.setEditing(false, animated: true)
+        }else{
+            showAlert(title: "Error", message: "No notes were selected")
         }
     }
     
