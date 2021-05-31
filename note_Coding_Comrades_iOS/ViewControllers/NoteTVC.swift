@@ -44,6 +44,7 @@ class NoteTVC: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        tableView.setEditing(false, animated: true)
         fetchNotes()
     }
     

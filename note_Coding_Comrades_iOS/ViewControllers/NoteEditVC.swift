@@ -366,7 +366,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             if error != nil { // if there was an error
                 print("error reverseGeocodeLocation" , error!) // print the error
             } else {
-                if let _ = placemarks?[0] {
+                if let placemark = placemarks?[0] {
                     self.mapKit.removeAnnotations(self.mapKit.annotations)
                     let latDelta: CLLocationDegrees = 0.2 // latitude delta
                     let lngDelta: CLLocationDegrees = 0.2 // longitude delta
@@ -376,7 +376,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
                     let annotation = MKPointAnnotation() // creates the point annotation object
 
                     annotation.title = "Your Location" // sets the annotation title
-                    annotation.subtitle = "" // sets the annotation subtitle
+                    annotation.subtitle =  placemark.locality! + ", " + placemark.administrativeArea! + ", " + placemark.country!   // sets the annotation subtitle
                     annotation.coordinate = coordinate // sets the annotation coordinate
                     self.mapKit.addAnnotation(annotation) // adds the annotation to the map
                 }
@@ -396,7 +396,19 @@ extension ViewController: MKMapViewDelegate {
         annotationView.animatesDrop = true // set true annotation animation
         annotationView.canShowCallout = true // set true can show callout
         annotationView.pinTintColor = UIColor.cyan
+        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) // set callout button
+
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        // create the alert
+        let alertController = UIAlertController(title: "You were in", message:  view.annotation!.subtitle as? String, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil) // create the dismiss button
+        alertController.addAction(cancelAction) // add the button to the alert
+        present(alertController, animated: true, completion: nil) //show the alert
+        
+
     }
 }
 
