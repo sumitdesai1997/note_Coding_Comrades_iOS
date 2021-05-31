@@ -35,6 +35,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     var audioRecorder: AVAudioRecorder!
     var audioPlayer: AVAudioPlayer!
     var audioURL: URL? = nil
+    var timer = Timer()
 
     // MAP - LOCATION VARIABLES
     var locationManager = CLLocationManager() // define location manager
@@ -95,7 +96,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             if let coordinateX = selectedNote?.coordinateX, let coordinateY = selectedNote?.coordinateY{
                 getLocation(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateX), longitude: CLLocationDegrees(coordinateY)))
             }
-            
+            scrubberSld.value = 0
             if let audio = selectedNote?.audio{
                 do {
                     try audioPlayer = AVAudioPlayer(data: audio)
@@ -103,6 +104,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
                     audioPlayer.currentTime = 0
                     playBtn.isEnabled = true
                     scrubberSld.isEnabled = true
+                    scrubberSld.maximumValue = Float(audioPlayer.duration)
+                    
                 } catch {
                     print(error)
                 }
@@ -216,22 +219,33 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     @IBAction func scrubberChange(_ sender: UISlider) {
         if sender.isEnabled {
             sender.value = Float(audioPlayer.currentTime)
-            if scrubberSld.value == sender.minimumValue{
-                playBtn.setImage(UIImage(systemName: "play.fill"), for: [])
+            if scrubberSld.value == sender.minimumValue {
+                playBtn.setImage( UIImage(systemName: "play.fill"), for: [] )
+                timer.invalidate()
             }
         }
 
     }
     @IBAction func playClick(_ sender: UIButton) {
-        if audioPlayer.isPlaying{
+        if audioPlayer.isPlaying {
             sender.setImage(UIImage(systemName: "play.fill"), for:[])
             audioPlayer.pause()
-        }else{
+            timer.invalidate()
+        }else {
             sender.setImage( UIImage(systemName: "pause.fill"), for: [])
             audioPlayer.play()
-
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateScrubber), userInfo: nil, repeats: true)
         }
     }
+    
+    @objc func updateScrubber(){
+        scrubberSld.value = Float(audioPlayer.currentTime)
+        if scrubberSld.value == scrubberSld.minimumValue{
+            playBtn.setImage(UIImage(systemName: "play.fill"), for:[])
+            timer.invalidate()
+        }
+    }
+    
     @IBAction func recordingClick(_ sender: UIButton) {
         if audioRecorder == nil {
                 startRecording()
@@ -241,6 +255,12 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     }
     
     func startRecording() {
+        if (audioPlayer != nil) && audioPlayer.isPlaying{
+            audioPlayer.stop()
+            timer.invalidate()
+            playBtn.setImage(UIImage(systemName: "play.fill"), for:[])
+        }
+        
         recordBtn.tintColor = .systemRed
         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
 
@@ -264,7 +284,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        print("path for audio: \(paths[0])")
         return paths[0]
     }
     
@@ -279,6 +298,8 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
                 audioPlayer.currentTime = 0
                 playBtn.isEnabled = true
                 scrubberSld.isEnabled = true
+                scrubberSld.value = 0
+                scrubberSld.maximumValue = Float(audioPlayer.duration)
                 recordBtn.tintColor = .systemBlue
             } catch {
                 print(error)
@@ -339,13 +360,13 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
 extension NoteEditVC : CLLocationManagerDelegate{
     // gets the current location and creates the annotation for it, as well as centers the map into the region closer to the location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if(selectedNote == nil){
+        if(selectedNote == nil && currentLocation == nil){
             userLocation = locations[0] // gets the location of the user
             
             let latitude = userLocation.coordinate.latitude // user latitude
             let longitude = userLocation.coordinate.longitude // user longitude
-            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) // sets the current location into the global variable
-            getLocation(coordinate: coordinate)
+            currentLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) // sets the current location into the global variable
+            getLocation(coordinate: currentLocation!)
 
         }
 
