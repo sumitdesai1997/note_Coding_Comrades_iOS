@@ -29,6 +29,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     
     var delegate : NoteTVC?
     var selectedNote : Note?
+    var shallSave = true
     
     // AUDIO VARIABLES
     var recordingSession: AVAudioSession!
@@ -47,7 +48,10 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         // Do any additional setup after loading the view.
         mapKit.showsUserLocation = false // show user location
         mapKit.isZoomEnabled = false// disable zoom
-        
+        // define style for the details text field
+        detailsTF.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 0.1) // set the descriptionfield border color
+        detailsTF.layer.borderWidth = 1.0 // set the descriptionfield border width
+        detailsTF.layer.cornerRadius = 5.0 // set the descriptionfield corner radius
         // ------------ location manager init -----------
         locationManager.delegate = self // assign location manager delegate
         mapKit.delegate = self // this class handles the delegate mapkit
@@ -57,6 +61,10 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
         
         recordingSession = AVAudioSession.sharedInstance()
 
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem:  .save, target: self, action: #selector(shallDisappear))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem:  .cancel, target: self, action: #selector(dismissWithoutSaving))
+        
         do {
             try recordingSession.setCategory(.record, mode: .default)
             try recordingSession.setActive(true)
@@ -119,32 +127,35 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        guard titleTF.text != "" && detailsTF.text != "" else {return}
-        
-        if (selectedNote == nil){
-            selectedNote =  Note(context: delegate!.context)
-            selectedNote?.parentCategory = delegate?.selectedCategory
-            selectedNote?.coordinateX = userLocation.coordinate.latitude
-            selectedNote?.coordinateY = userLocation.coordinate.longitude
+        if shallSave {
+            guard titleTF.text != "" && detailsTF.text != "" else {return}
+            
+            if (selectedNote == nil){
+                selectedNote =  Note(context: delegate!.context)
+                selectedNote?.parentCategory = delegate?.selectedCategory
+                selectedNote?.coordinateX = userLocation.coordinate.latitude
+                selectedNote?.coordinateY = userLocation.coordinate.longitude
+            }
+            
+            selectedNote?.title = titleTF.text
+            selectedNote?.details = detailsTF.text
+            selectedNote?.date = Date()
+            
+            if(notePictureImg.image != nil){
+                selectedNote?.image = notePictureImg.image!.pngData()!
+                print("image: \(notePictureImg.image!.pngData()!)")
+            }
+            
+            if (audioURL != nil){
+                selectedNote?.audio = try? Data(contentsOf: audioURL!)
+            }
+            
+            delegate!.saveNotes()
         }
-        
-        selectedNote?.title = titleTF.text
-        selectedNote?.details = detailsTF.text
-        selectedNote?.date = Date()
-        
-        if(notePictureImg.image != nil){
-            selectedNote?.image = notePictureImg.image!.pngData()!
-            print("image: \(notePictureImg.image!.pngData()!)")
-        }
-        
-        if (audioURL != nil){
-            selectedNote?.audio = try? Data(contentsOf: audioURL!)
-        }
-        
-        delegate!.saveNotes()
+
    }
-    
-    @IBAction func checkTitleExist(_ sender: Any) {
+    @objc func shallDisappear() {
+        shallSave = true
         let notesTitles = delegate?.noteList.map({$0.title!.lowercased()})
         if (notesTitles!.contains(titleTF.text!.lowercased())){
             titleTF.text = ""
@@ -152,8 +163,16 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
             let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
+            
+        }else{
+            navigationController?.popViewController(animated: true)
         }
     }
+    @objc func dismissWithoutSaving() {
+        shallSave = false
+        navigationController?.popViewController(animated: true)
+    }
+
         
     func viewVisibility(constraint: NSLayoutConstraint, button: UIView, hide: Bool, constant: Double){
         
@@ -321,11 +340,6 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
     
     //*************** MAP HANDLING ******************************
     // creates an annotation depending on the coordinates
-    func addAnnotation(coordinate: CLLocationCoordinate2D, title: String, subtitle: String ){
-        
-
-    }
-    
     func getLocation(coordinate: CLLocationCoordinate2D){
         let newLocation: CLLocation =  CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) // creates the location as CLLocation
 
@@ -341,10 +355,7 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
                     self.mapKit.setRegion(MKCoordinateRegion(center: coordinate, span: span), animated: true) // sets the region for the map
                     
                     let annotation = MKPointAnnotation() // creates the point annotation object
-                    let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin") // create the annotation view
-                    annotationView.animatesDrop = true // set true annotation animation
-                    annotationView.canShowCallout = true // set true can show callout
-                    annotationView.pinTintColor = UIColor.cyan
+
                     annotation.title = "Your Location" // sets the annotation title
                     annotation.subtitle = "" // sets the annotation subtitle
                     annotation.coordinate = coordinate // sets the annotation coordinate
@@ -356,7 +367,21 @@ class NoteEditVC: UIViewController, UIImagePickerControllerDelegate & UINavigati
 }
 
 //MARK: - MKMap Extension Class
+extension ViewController: MKMapViewDelegate {
+    // ViewFor annotation method
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation { // if the annotation is the user location
+            return nil // return nothing
+        }
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin") // create the annotation view
+        annotationView.animatesDrop = true // set true annotation animation
+        annotationView.canShowCallout = true // set true can show callout
+        annotationView.pinTintColor = UIColor.cyan
+        return annotationView
+    }
+}
 
+//MARK: - Location Manager Extension Class
 extension NoteEditVC : CLLocationManagerDelegate{
     // gets the current location and creates the annotation for it, as well as centers the map into the region closer to the location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

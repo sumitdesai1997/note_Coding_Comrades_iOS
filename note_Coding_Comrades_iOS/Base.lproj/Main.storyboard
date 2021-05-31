@@ -277,9 +277,6 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <action selector="checkTitleExist:" destination="X4X-3d-swQ" eventType="editingDidEnd" id="JfH-WH-JLI"/>
-                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEv-cY-HFj">
                                                 <rect key="frame" x="20" y="105" width="96.5" height="25"/>
@@ -287,9 +284,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Provide content for your note" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WOT-hk-gYt">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WOT-hk-gYt">
                                                 <rect key="frame" x="25" y="140" width="364" height="110"/>
-                                                <color key="backgroundColor" systemColor="tertiarySystemFillColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="110" id="sJD-1j-FGq"/>
                                                 </constraints>
@@ -529,7 +525,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tce-tb-Bgb"/>
+        <segue reference="BhO-bq-oHc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
@@ -560,9 +556,6 @@
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tertiarySystemFillColor">
-            <color red="0.46274509803921571" green="0.46274509803921571" blue="0.50196078431372548" alpha="0.12" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
