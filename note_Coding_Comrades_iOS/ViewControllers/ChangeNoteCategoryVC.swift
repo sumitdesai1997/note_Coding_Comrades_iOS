@@ -61,7 +61,9 @@ extension ChangeNoteCategoryVC: UITableViewDelegate, UITableViewDataSource {
         let alert = UIAlertController(title: "Move to \(otherCategories[indexPath.row].name!)", message: "Are you sure?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Move", style: .default) { (action) in
             for note in self.selectedNotes! {
+                note.title = note.title! + " from " + (note.parentCategory?.name)! + " category"
                 note.parentCategory = self.otherCategories[indexPath.row]
+                
             }
             // dismiss the vc
             self.performSegue(withIdentifier: "dismissChangeNoteCategoryVC", sender: self)
